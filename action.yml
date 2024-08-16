@@ -1,0 +1,43 @@
+name: Docker Deploy Action
+
+description: >
+  🪂  A Github Action to deploy pages
+
+branding:
+  icon: 'command'
+  color: 'yellow'
+
+inputs:
+  docker_hub_username:
+    description: Username for Docker Hub
+    default: ${{ github.actor }}
+    required: false
+  docker_hub_password:
+    description: Docker Hub password
+    required: true
+  docker_hub_token:
+    description: Docker Hub authentication token
+    required: true
+  credentials:
+    description: The Google cloud credentials
+    required: true
+  repository:
+    description: The deploy repository
+    default: ${{ github.repository }}
+    required: false
+  token:
+    description: The Github personal token
+    required: true
+  owner:
+    description: The deploy owner
+    default: ${{ github.repository_owner }}
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Force to update the main workflow conveniently
+      if: runner.os == 'Linux'
+      uses: eq19/eq19/.github/actions/1-ubuntu/1-maps/1-update@main
+      with:
+        token: ${{ inputs.token }}
