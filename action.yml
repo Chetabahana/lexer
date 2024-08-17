@@ -21,21 +21,9 @@ inputs:
   credentials:
     description: The Google cloud credentials
     required: true
-  repository:
-    description: The deploy repository
-    default: ${{ github.repository }}
-    required: false
   token:
     description: The Github personal token
     required: true
-  owner:
-    description: The deploy owner
-    default: ${{ github.repository_owner }}
-    required: false
-  actor:
-    description: The deploy actor
-    default: ${{ github.actor }}
-    required: false
 
 runs:
   using: composite
@@ -44,15 +32,15 @@ runs:
       if: runner.os == 'Linux'
       uses: eq19/eq19/.github/actions/1-ubuntu/1-maps/1-init@main
       with:
-        actor: ${{ inputs.actor }}
+        actor: ${{ github.actor }}
         token: ${{ inputs.token }}
-        repository: ${{ inputs.repository }}
 
     - name: Build action
       if: runner.os == 'Linux'
       uses: eq19/eq19/.github/actions/1-ubuntu/1-maps/2-build@main
       with:
         hub_username: ${{ inputs.docker_hub_username }}
+        hub_password: ${{ inputs.docker_hub_password }}
         hub_token: ${{ inputs.docker_hub_token }} 
 
     - name: Force to update property
