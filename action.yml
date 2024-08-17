@@ -47,6 +47,5 @@ runs:
         actor: ${{ inputs.actor }}
         token: ${{ inputs.token }}
         repository: ${{ inputs.repository }}
-        username: ${{ inputs.docker_hub_username }}
-        password: ${{ inputs.docker_hub_token }} 
-
+        hub_username: ${{ inputs.docker_hub_username }}
+        hub_token: ${{ inputs.docker_hub_token }} 
