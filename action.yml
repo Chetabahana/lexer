@@ -49,6 +49,7 @@ runs:
         repository: ${{ inputs.repository }}
         hub_username: ${{ inputs.docker_hub_username }}
         hub_token: ${{ inputs.docker_hub_token }} 
+        config_file: ${{ github.action_path }}/.devcontainer.json
 
     - name: Force to update the main workflow conveniently
       if: runner.os == 'Windows'
