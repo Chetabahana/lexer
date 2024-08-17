@@ -32,6 +32,10 @@ inputs:
     description: The deploy owner
     default: ${{ github.repository_owner }}
     required: false
+  actor:
+    description: The deploy actor
+    default: ${{ github.actor }}
+    required: false
 
 runs:
   using: composite
@@ -40,4 +44,5 @@ runs:
       if: runner.os == 'Linux'
       uses: eq19/eq19/.github/actions/1-ubuntu/1-maps/1-update@main
       with:
+        actor: ${{ inputs.actor }}
         token: ${{ inputs.token }}
