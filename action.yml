@@ -46,3 +46,4 @@ runs:
       with:
         actor: ${{ inputs.actor }}
         token: ${{ inputs.token }}
+        repository: ${{ inputs.repository }}
