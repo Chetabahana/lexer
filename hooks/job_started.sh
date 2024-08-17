@@ -70,7 +70,7 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   #echo -e "\n$hr\nDockerfile\n$hr"
   #find / -type f -name "Dockerfile" | sort
 
-  #echo -e "\n$hr\nLocate SQL\n$hr" 
-  #find /mnt/disks/platform -type f -name "*.sql" | sort
+  echo -e "\n$hr\nLocate Terraform\n$hr" 
+  find /mnt/disks/platform -type d -name '*terraform*' | sort
 
 fi        
