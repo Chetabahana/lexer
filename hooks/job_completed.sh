@@ -16,6 +16,17 @@ if [ -d /mnt/disks/platform/usr/bin ]; then
 
 fi
 
+# Set update workflow
+git config --global user.name "${ACTOR}"
+git config --global --add safe.directory ${GITHUB_WORKSPACE}
+git config --global user.email "${ACTOR}@users.noreply.github.com"
+
+CREDENTIAL=${TOKEN}
+[[ "${OWNER}" != "${USER}" ]] && CREDENTIAL=${INPUT_OWNER}
+REMOTE_REPO="https://${ACTOR}:${CREDENTIAL}@github.com/${OWNER}/$1.git"
+git init --initial-branch=master > /dev/null && git remote add origin ${REMOTE_REPO}
+#git add . && git commit -m "jekyll build" > /dev/null && git push --force ${REMOTE_REPO} master:gh-pages
+
 echo -e "\njob completed"
 HEADER="Accept: application/vnd.github+json"
 echo ${GITHUB_ACCESS_TOKEN} | gh auth login --with-token
