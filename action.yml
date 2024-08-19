@@ -77,7 +77,7 @@ runs:
       with:
         push: always
         skipContainerUserIdUpdate: true
-        runCmd: ls -al ${{ github.workspace }}
+        runCmd: ls -al .
         imageTag: build-${{ github.run_number }}
         configFile: ${{ github.action_path }}/.devcontainer.json
         imageName: ${{ inputs.docker_hub_username }}/${{ inputs.image_name }}
