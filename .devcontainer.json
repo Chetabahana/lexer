@@ -38,5 +38,5 @@
 	//"remoteUser": "vscode",
 
 	// Ref: https://stackoverflow.com/a/78198727/4058484
-	"postCreateCommand": "ls -al ."
+	"postCreateCommand": "set"
 }
