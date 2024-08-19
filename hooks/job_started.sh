@@ -22,7 +22,7 @@ echo -e "\n$hr\nDisk Structure\n$hr"
 df -h
 
 echo -e "\n$hr\nCurrent dir\n$hr"
-pwd && ls -al .
+pwd && ls -al . && ls -alR /home/runner
   
 echo -e "\n$hr\nService Status\n$hr"
 service --status-all
