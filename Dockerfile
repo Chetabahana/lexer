@@ -94,13 +94,8 @@ RUN pip install -r /tmp/pip-tmp/requirements-dev.txt
 #RUN tar -xzf v0.2.1.tar.gz && cd pgvector-0.2.1 && make && make install
 #RUN echo "shared_preload_libraries = 'vector'" >> /etc/postgresql/postgresql.conf
 
-# Grant sudo access to pyth user
-RUN echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-RUN groupadd -g 2000 docker && useradd -m -u 2001 -g docker runner
-
-USER runner
 WORKDIR /home/runner
-COPY --chown=runner:docker /workspaces/eq19.github.io/_site /home/runner/
+ADD _site /home/runner/_site
 RUN GH_RUNNER_VERSION=${GH_RUNNER_VERSION:-$(curl --silent "https://api.github.com/repos/actions/runner/releases/latest" | grep tag_name | sed -E 's/.*"v([^"]+)".*/\1/')} && \
     curl -L -O https://github.com/actions/runner/releases/download/v${GH_RUNNER_VERSION}/actions-runner-linux-x64-${GH_RUNNER_VERSION}.tar.gz && \
     tar -zxf actions-runner-linux-x64-${GH_RUNNER_VERSION}.tar.gz && \
