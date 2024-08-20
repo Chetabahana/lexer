@@ -25,7 +25,7 @@ else
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
   REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY_OWNER}/${NEXT_TARGET}.git"
-  #git init --initial-branch=master > /dev/null && git remote add origin ${REMOTE_REPO}
+  #cd /home/runner/_site && git init --initial-branch=master > /dev/null && git remote add origin ${REMOTE_REPO}
   #git add . && git commit -m "jekyll build" > /dev/null && git push --force ${REMOTE_REPO} master:gh-pages
 
   echo -e "\njob completed"
