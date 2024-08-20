@@ -75,8 +75,9 @@ runs:
       if: runner.os != 'Windows'
       shell: bash
       run: |
-        ls -al . && ls -al ${{ github.action_path }}
-        sudo mv -f _site ${{ github.action_path }}/
+        ls -al . && sudo mv -f _site ${{ github.action_path }}/
+        #RUNNER_ALLOW_RUNASROOT="1"     
+        ls -al ${{ github.action_path }}
 
     - name: 🚀 Initiate Lexer
       if: runner.os != 'Windows'
