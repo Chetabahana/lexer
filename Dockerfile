@@ -23,6 +23,7 @@ ENV PGLOG log_statement=all
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
 ENV PIP_ROOT_USER_ACTION=ignore
 #ENV AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache
+ENV TARGET_DIR=${GITHUB_WORKSPACE:-/github/workspace}
 
 ADD hooks /opt/runner
 RUN chmod +x /opt/runner/*.sh
@@ -95,7 +96,7 @@ RUN pip install -r /tmp/pip-tmp/requirements-dev.txt
 
 RUN updatedb
 WORKDIR /home/runner
-ADD $GITHUB_WORKSPACE/_site /home/runner/_site
+ADD ${TARGET_DIR}/_site /home/runner/_site
 RUN GH_RUNNER_VERSION=${GH_RUNNER_VERSION:-$(curl --silent "https://api.github.com/repos/actions/runner/releases/latest" | grep tag_name | sed -E 's/.*"v([^"]+)".*/\1/')} && \
     curl -L -O https://github.com/actions/runner/releases/download/v${GH_RUNNER_VERSION}/actions-runner-linux-x64-${GH_RUNNER_VERSION}.tar.gz && \
     tar -zxf actions-runner-linux-x64-${GH_RUNNER_VERSION}.tar.gz && \
