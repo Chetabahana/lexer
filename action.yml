@@ -41,7 +41,7 @@ inputs:
     required: false
     default: /tmp/.buildx-cache
   cache_dest:
-    description: Path for the docker cache destination
+    description: Path for the docker cache destinationoh
     required: false
     default: /tmp/.buildx-cache-new
   provider:
@@ -75,6 +75,7 @@ runs:
       if: runner.os != 'Windows'
       shell: bash
       run: |
+        chown -R runner:docker _site
         ls -al . && ls -al ${{ github.action_path }}
         mv -f _site ${{ github.action_path }}/
 
