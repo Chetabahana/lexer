@@ -75,7 +75,6 @@ runs:
       if: runner.os != 'Windows'
       shell: bash
       run: |
-        chown -R runner:docker _site
         ls -al . && ls -al ${{ github.action_path }}
         mv -f _site ${{ github.action_path }}/
 
