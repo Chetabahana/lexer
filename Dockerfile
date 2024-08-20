@@ -94,7 +94,10 @@ RUN pip install -r /tmp/pip-tmp/requirements-dev.txt
 #RUN tar -xzf v0.2.1.tar.gz && cd pgvector-0.2.1 && make && make install
 #RUN echo "shared_preload_libraries = 'vector'" >> /etc/postgresql/postgresql.conf
 
+# Grant sudo access to pyth user
+RUN echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN useradd -m runner:docker
+
 USER runner
 WORKDIR /home/runner
 COPY --chown=runner:docker ${GITHUB_WORKSPACE} /home/runner/
