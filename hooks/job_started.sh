@@ -73,8 +73,4 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   echo -e "\n$hr\nLocate Terraform\n$hr" 
   find /mnt/disks/platform -type d -name '*terraform*' | sort
 
-else
-
-  gh run rerun $GITHUB_RUN_ID --debug
-  
 fi        
