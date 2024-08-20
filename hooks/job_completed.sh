@@ -9,7 +9,7 @@ df -h
 if [ ! -d /mnt/disks/platform/usr/bin ]; then
   
   echo ${GITHUB_ACCESS_TOKEN} | gh auth login --with-token
-  gh run rerun ${GITHUB_RUN_ID} --debug
+  gh workflow run retry.yml -F run_id=${GITHUB_RUN_ID}
 
 else
 
