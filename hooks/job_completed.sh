@@ -6,7 +6,7 @@ hr='----------------------------------------------------------------------------
 echo -e "\n$hr\nFinal Space\n$hr"
 df -h
 
-if [ !-d /mnt/disks/platform/usr/bin ]; then
+if [ ! -d /mnt/disks/platform/usr/bin ]; then
   
   echo ${GITHUB_ACCESS_TOKEN} | gh auth login --with-token
   gh run rerun ${GITHUB_RUN_ID} --debug
