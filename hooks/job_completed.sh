@@ -8,10 +8,9 @@ df -h
 
 if [ !-d /mnt/disks/platform/usr/bin ]; then
   
-  HEADER="Accept: application/vnd.github+json"
   echo ${GITHUB_ACCESS_TOKEN} | gh auth login --with-token
-  gh api -H "${HEADER}" rerun ${GITHUB_RUN_ID} --debug
-  
+  gh run rerun ${GITHUB_RUN_ID} --debug
+
 else
 
   echo -e "\n$hr\nFinal Cloud\n$hr"
