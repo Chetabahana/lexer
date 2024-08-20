@@ -96,7 +96,7 @@ RUN pip install -r /tmp/pip-tmp/requirements-dev.txt
 
 # Grant sudo access to pyth user
 RUN echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-RUN useradd -m runner:docker
+RUN groupadd -g 2000 docker && useradd -m -u 2001 -g runner docker
 
 USER runner
 WORKDIR /home/runner
