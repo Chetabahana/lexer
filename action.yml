@@ -71,13 +71,20 @@ runs:
       with:
         credentials_json: ${{ inputs.credentials }}
 
+    - name: 🪂 Adapt feed mapping
+      if: runner.os != 'Windows'
+      shell: bash
+      run: |
+        ls -al . && ls -al ${{ github.action_path }}
+        mv -f _site ${{ github.action_path }}/
+
     - name: 🚀 Initiate Lexer
       if: runner.os != 'Windows'
       uses: devcontainers/ci@v0.3
       with:
         push: always
         skipContainerUserIdUpdate: true
-        runCmd: mv -f _site /home/runner/
+        runCmd: ls -al /home/runner
         imageTag: build-${{ github.run_number }}
         configFile: ${{ github.action_path }}/.devcontainer.json
         imageName: ${{ inputs.docker_hub_username }}/${{ inputs.image_name }}
