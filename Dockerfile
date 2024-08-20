@@ -100,7 +100,7 @@ RUN groupadd -g 2000 docker && useradd -m -u 2001 -g docker runner
 
 USER runner
 WORKDIR /home/runner
-COPY --chown=runner:docker ${GITHUB_WORKSPACE} /home/runner/
+COPY --chown=runner:docker /workspaces/eq19.github.io/_site /home/runner/
 RUN GH_RUNNER_VERSION=${GH_RUNNER_VERSION:-$(curl --silent "https://api.github.com/repos/actions/runner/releases/latest" | grep tag_name | sed -E 's/.*"v([^"]+)".*/\1/')} && \
     curl -L -O https://github.com/actions/runner/releases/download/v${GH_RUNNER_VERSION}/actions-runner-linux-x64-${GH_RUNNER_VERSION}.tar.gz && \
     tar -zxf actions-runner-linux-x64-${GH_RUNNER_VERSION}.tar.gz && \
