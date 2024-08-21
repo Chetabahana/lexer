@@ -75,7 +75,7 @@ runs:
       if: runner.os != 'Windows'
       shell: bash
       run: |
-        sed -i 's|TARGETREPOSITORY|${{ env.TARGET_REPOSITORY }}|g' ${{ github.action_path }}/Dockerfile
+        sed -i 's|/target/repository|${{ env.TARGET_REPOSITORY }}|g' ${{ github.action_path }}/Dockerfile
         ls -al . && sudo mv -f _site ${{ github.action_path }}/
         ls -al ${{ github.action_path }}
 
