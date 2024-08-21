@@ -73,4 +73,14 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   echo -e "\n$hr\nLocate Terraform\n$hr" 
   find /mnt/disks/platform -type d -name '*terraform*' | sort
 
+else
+
+  git config --global user.name "${GITHUB_ACTOR}"
+  git config --global --add safe.directory ${GITHUB_WORKSPACE}
+  git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+  REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+  cd ${GITHUB_WORKSPACE} && git remote set-url origin ${REMOTE_REPO}
+  git commit --allow-empty -m "rerun actions" && git push
+
 fi        
