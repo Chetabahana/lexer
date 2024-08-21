@@ -88,6 +88,8 @@ runs:
         imageTag: build-${{ github.run_number }}
         configFile: ${{ github.action_path }}/.devcontainer.json
         imageName: ${{ inputs.docker_hub_username }}/${{ inputs.image_name }}
+        env: |
+          TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}
 
     - name: 💎 Variables
       if: runner.os != 'Windows'
