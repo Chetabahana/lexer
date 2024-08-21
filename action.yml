@@ -183,7 +183,7 @@ runs:
             ExecStopPost=/usr/bin/docker rm myrunner
             ExecStartPre=/usr/bin/docker-credential-gcr configure-docker
             ExecStart=/usr/bin/docker run --rm \
-              -e NEXT_TARGET=${NEXT_TARGET} \
+              -e NEXT_TARGET=${{ env.NEXT_TARGET }} \
               -e RUNNER_REPLACE_EXISTING=true \
               -e RUNNER_NAME=Google-optimized-instance \
               -e RUNNER_REPOSITORY_URL=https://github.com/${{ inputs.repository }} \
