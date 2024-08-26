@@ -80,7 +80,8 @@ else
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
   REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-  cd ${GITHUB_WORKSPACE} && git remote set-url origin ${REMOTE_REPO}
-  git commit --allow-empty -m "rerun actions" && git push
+  rm -rf ${GITHUB_WORKSPACE} && cd ${RUNNER_WORKSPACE} && git clone ${REMOTE_REPO}
+  cd ${GITHUB_WORKSPACE} && git commit --allow-empty -m "rerun actions"
+  git push
 
 fi        
