@@ -39,7 +39,7 @@ dpkg -l | sort
 echo -e "\n$hr\nExecutables\n$hr"
 find ${PATH//:/ } -maxdepth 1 -executable | sort
 
-if [ ! -d /mnt/disks/platform/usr/local/sbin ]; then
+if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   
   echo -e "\n$hr\n"
   find /mnt/disks/platform -maxdepth 3 -executable | sort 
