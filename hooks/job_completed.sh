@@ -23,4 +23,3 @@ git add . && git commit -m "action pages jekyll build" > /dev/null && git push -
 
 echo -e "\njob completed"
 
-fi
