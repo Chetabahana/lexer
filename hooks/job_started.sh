@@ -75,13 +75,14 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
 
 else
 
+  cd ${RUNNER_WORKSPACE}
+  
   git config --global user.name "${GITHUB_ACTOR}"
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
   REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-  rm -rf ${GITHUB_WORKSPACE} && cd ${RUNNER_WORKSPACE}
-  
-  git clone --single-branch -b ${GITHUB_REF} ${REMOTE_REPO}
+  rm -rf ${GITHUB_WORKSPACE} && git clone --single-branch -b ${GITHUB_REF_NAME} ${REMOTE_REPO}
+
   git config --global --add safe.directory ${GITHUB_WORKSPACE} && cd ${GITHUB_WORKSPACE}
   git commit --allow-empty -m "rerun actions" && git push
 
