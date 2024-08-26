@@ -82,6 +82,6 @@ else
   REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
   rm -rf ${GITHUB_WORKSPACE} && cd ${RUNNER_WORKSPACE} && git clone ${REMOTE_REPO}
   cd ${GITHUB_WORKSPACE} && git commit --allow-empty -m "rerun actions"
-  git push
+  git push && if [ $? -eq 0 ]; then exit 1; fi
 
 fi        
