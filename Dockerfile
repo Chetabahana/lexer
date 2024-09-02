@@ -27,7 +27,7 @@ ENV ACTIONS_RUNNER_HOOK_JOB_COMPLETED=/opt/runner/job_completed.sh
 
 ADD hooks /opt/runner
 RUN chmod +x /opt/runner/*.sh
-#RUN mkdir -p ${AGENT_TOOLSDIRECTORY}
+#RUN mkdir -p $AGENT_TOOLSDIRECTORY
 
 LABEL maintainer="me@tcardonne.fr" \
     org.label-schema.schema-version="1.0" \
@@ -97,9 +97,9 @@ RUN pip install -r /tmp/pip-tmp/requirements-dev.txt
 WORKDIR /home/runner
 ADD _site /home/runner/_site
 RUN GH_RUNNER_VERSION=${GH_RUNNER_VERSION:-$(curl --silent "https://api.github.com/repos/actions/runner/releases/latest" | grep tag_name | sed -E 's/.*"v([^"]+)".*/\1/')} && \
-    curl -L -O https://github.com/actions/runner/releases/download/v${GH_RUNNER_VERSION}/actions-runner-linux-x64-${GH_RUNNER_VERSION}.tar.gz && \
-    tar -zxf actions-runner-linux-x64-${GH_RUNNER_VERSION}.tar.gz && \
-    rm -f actions-runner-linux-x64-${GH_RUNNER_VERSION}.tar.gz && \
+    curl -L -O https://github.com/actions/runner/releases/download/v$GH_RUNNER_VERSION/actions-runner-linux-x64-$GH_RUNNER_VERSION.tar.gz && \
+    tar -zxf actions-runner-linux-x64-$GH_RUNNER_VERSION.tar.gz && \
+    rm -f actions-runner-linux-x64-$GH_RUNNER_VERSION.tar.gz && \
     ./bin/installdependencies.sh && \
     chown -R root: /home/runner && \
     apt-get clean && \
