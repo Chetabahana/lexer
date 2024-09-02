@@ -63,6 +63,9 @@ inputs:
     description: 'The deploy repository'
     default: ${{ github.repository }}
     required: false
+  siteid:
+    description: 'The site id of target repository'
+    required: false
 
 runs:
   using: composite
@@ -244,7 +247,7 @@ runs:
       shell: bash
       # Ref: https://stackoverflow.com/a/47018417/4058484
       run: >
-        gcloud compute instances create build-${{ github.run_number }}
+        gcloud compute instances create build-${{ inputs.siteid }}
         --service-account=project-owner@feedmapping.iam.gserviceaccount.com
         --zone=us-central1-a --machine-type=e2-micro --enable-display-device --tags=https-server
         --boot-disk-device-name=cos --image-project cos-cloud --image-family cos-stable --metadata-from-file=user-data=cloud-config
