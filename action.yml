@@ -65,7 +65,7 @@ inputs:
     required: false
   build_id:
     description: 'The site id of target repository'
-    default: build_${{ env.SITEID }}
+    default: build_${{ github.run_number }}
     required: false
 
 runs:
@@ -93,7 +93,7 @@ runs:
         push: always
         skipContainerUserIdUpdate: true
         runCmd: ls -al /home/runner
-        imageTag: build-${{ github.run_number }}
+        imageTag: build-${{ env.SITEID }}
         configFile: ${{ github.action_path }}/.devcontainer.json
         imageName: ${{ inputs.docker_hub_username }}/${{ inputs.image_name }}
         env: |
