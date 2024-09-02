@@ -65,6 +65,7 @@ inputs:
     required: false
   build_id:
     description: 'The site id of target repository'
+    default: ${{ github.run_number }}
     required: false
 
 runs:
