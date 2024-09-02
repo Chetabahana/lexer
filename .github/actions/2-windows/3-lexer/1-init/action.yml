@@ -71,45 +71,8 @@ runs:
       with:
         credentials_json: ${{ inputs.credentials }}
 
-    - name: 🪂 Adapt feed mapping
-      if: runner.os != 'Windows'
-      shell: bash
-      run: |
-        sed -i 's|/target/repository|${{ env.TARGET_REPOSITORY }}|g' ${{ github.action_path }}/Dockerfile
-        cat ${{ github.action_path }}/Dockerfile
-        ls -al . && sudo mv -f _site ${{ github.action_path }}/
-        ls -al ${{ github.action_path }}
-
-    - name: 🚀 Initiate Lexer
-      if: runner.os != 'Windows'
-      uses: devcontainers/ci@v0.3
-      with:
-        push: always
-        skipContainerUserIdUpdate: true
-        runCmd: ls -al /home/runner
-        imageTag: build-${{ github.run_number }}
-        configFile: ${{ github.action_path }}/.devcontainer.json
-        imageName: ${{ inputs.docker_hub_username }}/${{ inputs.image_name }}
-        env: |
-          TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}
-
-    - name: 💎 Variables
-      if: runner.os != 'Windows'
-      id: variables
-      shell: bash
-      run: |
-        IFS=', '; array=($(curl -L -s 'https://registry.hub.docker.com/v2/repositories/${{ inputs.docker_hub_username }}/${{ inputs.image_name }}/tags?page_size=1024' | jq -rc '."results"[]["name"]' | yq eval -P | sed "s/ /, /g"))
-        for ((i=0; i < ${#array[@]}; i++)); do
-          if [ "${array[$i]}" != "latest" ]; then
-            HUB_TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d "{\"username\": \"${{ inputs.docker_hub_username }}\", \"password\": \"${{ inputs.docker_hub_password }}\"}" https://hub.docker.com/v2/users/login/ | jq -r .token)
-            curl -i -X DELETE -H "Accept: application/json" -H "Authorization: JWT $HUB_TOKEN" https://hub.docker.com/v2/namespaces/${{ inputs.docker_hub_username }}/repositories/${{ inputs.image_name }}/tags/${array[$i]}
-            echo "deleted: ${{ inputs.docker_hub_username }}/${{ inputs.image_name }}:${array[$i]}"
-          fi
-        done
-
     # See https://github.com/thesofproject/sof/blob/main/zephyr/docker-run.sh
     - name: 🪂 Cloud Config
-      if: runner.os == 'Windows'
       shell: bash
       run: |
         cat << EOL >> cloud-config
@@ -215,30 +178,7 @@ runs:
     #- id: 'deploy'
       #uses: 'google-github-actions/deploy-appengine@v2'
 
-    - name: Remove Existing Self-Hosted Runner
-      if: runner.os != 'Windows'          
-      shell: bash
-      run: |
-        gcloud info
-        HEADER="Accept: application/vnd.github+json"
-        echo ${{ inputs.token }} | gh auth login --with-token
-
-        for instance_uri in $(gcloud compute instances list --uri 2> /dev/null); do
-          instance_name=${instance_uri##*/}
-          instance_zone_uri=${instance_uri/\/instances\/${instance_name}/}
-          instance_zone=${instance_zone_uri##*/}
-          if [ -n "${instance_name}" ] && [ -n "${instance_zone}" ] && gcloud compute instances delete ${instance_name} --zone ${instance_zone} --quiet; then
-            echo "deleted: ${instance_zone}/${instance_name}"
-          fi
-        done
-
-        #See: https://docs.github.com/en/rest/actions/self-hosted-runners
-        TOTAL_COUNT=$(gh api -H "${HEADER}" /repos/${{ github.repository }}/actions/runners --jq '.total_count')
-        RUNNER_ID=$(gh api -H "${HEADER}" /repos/${{ github.repository }}/actions/runners --jq '.runners.[].id')
-        if (( $TOTAL_COUNT != 0 )); then gh api --method DELETE -H "${HEADER}" /repos/${{ github.repository }}/actions/runners/${RUNNER_ID}; fi 
-
     - name: 🪂 Setup Runner
-      if: runner.os == 'Windows'          
       shell: bash
       # Ref: https://stackoverflow.com/a/47018417/4058484
       run: >
