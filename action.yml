@@ -65,7 +65,7 @@ inputs:
     required: false
   build_id:
     description: 'The site id of target repository'
-    default: ${{ github.run_number }}
+    default: build_${{ github.run_number }}
     required: false
 
 runs:
@@ -248,7 +248,7 @@ runs:
       shell: bash
       # Ref: https://stackoverflow.com/a/47018417/4058484
       run: >
-        gcloud compute instances create build-${{ inputs.build_id }}
+        gcloud compute instances create ${{ inputs.build_id }}
         --service-account=project-owner@feedmapping.iam.gserviceaccount.com
         --zone=us-central1-a --machine-type=e2-micro --enable-display-device --tags=https-server
         --boot-disk-device-name=cos --image-project cos-cloud --image-family cos-stable --metadata-from-file=user-data=cloud-config
