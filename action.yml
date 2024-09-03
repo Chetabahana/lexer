@@ -68,6 +68,11 @@ inputs:
     default: build_${{ github.run_number }}
     required: false
 
+outputs:
+  output_3:
+    description: "A file path to a results file."
+    value: ${{ env.TARGET_REPOSITORY }}
+
 runs:
   using: composite
   steps:
