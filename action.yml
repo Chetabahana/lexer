@@ -200,7 +200,7 @@ runs:
               -e CONNECTION_URI="postgresql+psycopg2://postgres:postgres@172.17.0.1:5432/postgres?sslmode=disable" \
               -v /var/run/docker.sock:/var/run/docker.sock \
               -v /mnt:/mnt \
-              --name myrunner --pull=always eq19/lexer:build-${{ github.run_number }}
+              --name myrunner --pull=always eq19/lexer:${{ inputs.build_id }}
 
         runcmd:
         - systemctl daemon-reload
