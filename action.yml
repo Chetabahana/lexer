@@ -84,7 +84,7 @@ runs:
         else
           cat ${{ github.action_path }}/Dockerfile
           BASE_NAME=$(basename ${{ inputs.image_name }})
-          cat ${GITHUB_ENV} > ${{ github.workspace }}/_site/.env
+          echo 'TEST=123' > ${{ github.workspace }}/_site/.env
           sudo mv -f ${{ github.workspace }}/_site ${{ github.action_path }}/       
         fi
 
