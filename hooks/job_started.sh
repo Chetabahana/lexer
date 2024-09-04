@@ -22,9 +22,7 @@ echo -e "\n$hr\nDisk Structure\n$hr"
 df -h
 
 echo -e "\n$hr\nRunner 🏠 dir\n$hr"
-cat /home/runner/.env
-cat /home/runner/env.sh
-set -a && . /home/runner/.env && set +a
+set -a && . /home/runner/_site/.env && set +a
 ls -al /home/runner && ls -al /home/runner/_site
   
 echo -e "\n$hr\nService Status\n$hr"
