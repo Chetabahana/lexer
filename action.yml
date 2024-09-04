@@ -98,7 +98,7 @@ runs:
         push: always
         skipContainerUserIdUpdate: true
         runCmd: ls -al /home/runner
-        imageTag: build-${{ env.SITEID }}
+        imageTag: spin-${{ env.SITEID }}
         configFile: ${{ github.action_path }}/.devcontainer.json
         imageName: ${{ inputs.docker_hub_username }}/${{ inputs.image_name }}
         env: |
