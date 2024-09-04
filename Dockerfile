@@ -1,8 +1,6 @@
+ARG DEBIAN_FRONTEND=noninteractive
 ARG FROM=node:lts-bookworm-slim
 FROM ${FROM}
-
-ARG GH_RUNNER_VERSION
-ARG DEBIAN_FRONTEND=noninteractive
 
 ENV RUNNER_NAME=""
 ENV RUNNER_TOKEN=""
@@ -94,6 +92,8 @@ RUN pip install -r /tmp/pip-tmp/requirements-dev.txt
 
 WORKDIR /home/runner
 ADD _site /home/runner/_site
+
+ARG GH_RUNNER_VERSION
 RUN GH_RUNNER_VERSION=${GH_RUNNER_VERSION:-$(curl --silent "https://api.github.com/repos/actions/runner/releases/latest" | grep tag_name | sed -E 's/.*"v([^"]+)".*/\1/')} && \
     curl -L -O https://github.com/actions/runner/releases/download/v$GH_RUNNER_VERSION/actions-runner-linux-x64-$GH_RUNNER_VERSION.tar.gz && \
     tar -zxf actions-runner-linux-x64-$GH_RUNNER_VERSION.tar.gz && \
