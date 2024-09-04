@@ -21,10 +21,6 @@ inputs:
   credentials:
     description: 'The gcloud credentials'
     required: true
-  image_name:
-    description: "Name for the container to be created. Example: nginx"
-    default: 'lexer'
-    required: false
   image_tag:
     description: Tag to use for the new image
     required: true
@@ -90,7 +86,7 @@ runs:
           JEKYLL_GITHUB_TOKEN=${{ inputs.token }} DISABLE_WHITELIST=true jekyll build --profile -t -p ${{ github.workspace }}/workdir/_plugins -d ${{ github.action_path }}/_site
         fi
 
-        IFS=', '; array=($(curl -L -s 'https://registry.hub.docker.com/v2/repositories/${{ inputs.docker_hub_username }}/${{ inputs.image_name }}/tags?page_size=1024' | jq -rc '."results"[]["name"]' | yq eval -P | sed "s/ /, /g")) 
+        IFS=', '; array=($(curl -L -s 'https://registry.hub.docker.com/v2/repositories/${{ inputs.docker_hub_username }}/$(basename ${{ github.action_repository }})/tags?page_size=1024' | jq -rc '."results"[]["name"]' | yq eval -P | sed "s/ /, /g")) 
         for ((i=0; i < ${#array[@]}; i++)); do
           if [[ "${array[$i]}" != "latest" ]]; then
             if [[ "$RUNNER_OS" == "Windows" ]]; then
@@ -112,7 +108,7 @@ runs:
         runCmd: ls -al /home/runner
         imageTag: spin-${{ env.SITEID }}
         configFile: ${{ github.action_path }}/.devcontainer.json
-        imageName: ${{ inputs.docker_hub_username }}/${{ inputs.image_name }}
+        imageName: ${{ github.action_repository }}
         env: |
           TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}
 
