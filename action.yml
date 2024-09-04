@@ -93,6 +93,9 @@ runs:
             fi
           fi
         done
+  
+        cat ${{ github.action_path }}/Dockerfile
+        sudo mv -f ${{ github.workspace }}/_site ${{ github.action_path }}/
 
     - name: 🚀 Initiate Lexer
       if: runner.os != 'Windows'
