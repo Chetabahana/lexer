@@ -83,7 +83,7 @@ runs:
           choco install yq
         else
           cat ${{ github.action_path }}/Dockerfile
-          BASE_NAME=$(basename ${{ inputs.image_name }})
+          BASE_NAME=$(basename ${{ inputs.image_name }}) && cat ${GITHUB_ENV} && echo "gak jelas"
           while IFS= read -r line; do echo "$line" >> ${{ github.workspace }}/_site/.env; done < ${GITHUB_ENV}
           cat ${{ github.workspace }}/_site/.env && sudo mv -f ${{ github.workspace }}/_site ${{ github.action_path }}/       
         fi
