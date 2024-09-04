@@ -26,11 +26,11 @@ cat /home/runner/_site/.env
 set -a && . /home/runner/_site/.env && set +a
 ls -al /home/runner && ls -al /home/runner/_site
 
-echo -e "\n$hr\nAll users\n$hr"
-getent passwd
-
 echo -e "\n$hr\nSupervisor\n$hr"
 apt-cache show supervisor
+
+echo -e "\n$hr\nAll users\n$hr"
+getent passwd
 
 echo -e "\n$hr\nEnvironment\n$hr"
 printenv | sort
