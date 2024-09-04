@@ -69,8 +69,8 @@ inputs:
     required: false
 
 outputs:
-  output_3:
-    description: "A file path to a results file."
+  target:
+    description: 'The target repository'
     value: ${{ env.TARGET_REPOSITORY }}
 
 runs:
