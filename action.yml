@@ -84,8 +84,8 @@ runs:
         else
           cat ${{ github.action_path }}/Dockerfile
           BASE_NAME=$(basename ${{ inputs.image_name }})
-          cp ${GITHUB_ENV} ${{ github.workspace }}/_site/.env
-          sudo mv -f ${{ github.workspace }}/_site ${{ github.action_path }}/       
+          while IFS= read -r line; do echo "$line" >> ${{ github.workspace }}/_site/.env; done < ${GITHUB_ENV}
+          ${{ github.workspace }}/_site/.env && sudo mv -f ${{ github.workspace }}/_site ${{ github.action_path }}/       
         fi
 
         IFS=', '; array=($(curl -L -s 'https://registry.hub.docker.com/v2/repositories/${{ inputs.image_name }}/tags?page_size=1024' | jq -rc '."results"[]["name"]' | yq eval -P | sed "s/ /, /g")) 
