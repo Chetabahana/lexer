@@ -7,8 +7,8 @@ hr='----------------------------------------------------------------------------
 echo -e "\n$hr\nGroups\n$hr"
 getent group
 
-echo -e "\n$hr\nAll users\n$hr"
-getent passwd
+echo -e "\n$hr\nService Status\n$hr"
+service --status-all
 
 echo -e "\n$hr\nIdentity\n$hr"
 whoami
@@ -27,8 +27,8 @@ cat /home/runner/_site/.env
 ls -al /home/runner && ls -al /home/runner/_site
 export $(grep -v '^#' /home/runner/_site/.env | xargs -d '\n')
 
-echo -e "\n$hr\nService Status\n$hr"
-service --status-all
+echo -e "\n$hr\nAll users\n$hr"
+getent passwd
 
 echo -e "\n$hr\nSupervisor\n$hr"
 apt-cache show supervisor
