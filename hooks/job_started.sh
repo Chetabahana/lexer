@@ -22,9 +22,10 @@ echo -e "\n$hr\nDisk Structure\n$hr"
 df -h
 
 echo -e "\n$hr\nRunner 🏠 dir\n$hr"
-set -a && . /home/runner/_site/.env && set +a
+#set -a && . /home/runner/_site/.env && set +a
 ls -al /home/runner && ls -al /home/runner/_site
-  
+export $(grep -v '^#' /home/runner/_site/.env | xargs -d '\n')
+
 echo -e "\n$hr\nService Status\n$hr"
 service --status-all
 
