@@ -87,19 +87,6 @@ runs:
         ls -al . && sudo mv -f _site ${{ github.action_path }}/
         ls -al ${{ github.action_path }}
 
-    - name: 🚀 Initiate Lexer
-      if: runner.os != 'Windows'
-      uses: devcontainers/ci@v0.3
-      with:
-        push: always
-        skipContainerUserIdUpdate: true
-        runCmd: ls -al /home/runner
-        imageTag: spin-${{ env.SITEID }}
-        configFile: ${{ github.action_path }}/.devcontainer.json
-        imageName: ${{ inputs.docker_hub_username }}/${{ inputs.image_name }}
-        env: |
-          TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}
-
     - name: 💎 Variables
       id: variables
       shell: bash
@@ -124,6 +111,19 @@ runs:
             fi
           fi
         done
+
+    - name: 🚀 Initiate Lexer
+      if: runner.os != 'Windows'
+      uses: devcontainers/ci@v0.3
+      with:
+        push: always
+        skipContainerUserIdUpdate: true
+        runCmd: ls -al /home/runner
+        imageTag: spin-${{ env.SITEID }}
+        configFile: ${{ github.action_path }}/.devcontainer.json
+        imageName: ${{ inputs.docker_hub_username }}/${{ inputs.image_name }}
+        env: |
+          TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}
 
     # See https://github.com/thesofproject/sof/blob/main/zephyr/docker-run.sh
     - name: 🪂 Cloud Config
