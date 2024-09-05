@@ -17,7 +17,7 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   echo -e "\n$hr\nNext Workflow\n$hr"
   cd /home/runner/_site && touch .nojekyll
   set -a && . /home/runner/_site/.env && set +a
-
+  set
   git config --global user.name "${GITHUB_ACTOR}"
   git config --global --add safe.directory ${GITHUB_WORKSPACE}
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
