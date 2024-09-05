@@ -83,9 +83,9 @@ runs:
           choco install yq
         else
           BASE_NAME=$(basename ${{ inputs.image_name }})
-          echo 'ID='${{ env.ID }} >> ${{ github.workspace }}/_site/.env
-          echo 'SPIN='${{ env.SPIN }} >> ${{ github.workspace }}/_site/.env
-          echo 'TARGET_REPOSITORY='${{ env.TARGET_REPOSITORY }} >> ${{ github.workspace }}/_site/.env
+          echo "ID=${{ env.ID }}" >> ${{ github.workspace }}/_site/.env
+          echo "SPIN=${{ env.SPIN }}" >> ${{ github.workspace }}/_site/.env
+          echo "TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}" >> ${{ github.workspace }}/_site/.env
           sudo mv -f ${{ github.workspace }}/_site ${{ github.action_path }}/ && cat ${{ github.action_path }}/_site/.env && cat ${{ github.action_path }}/Dockerfile
         fi
 
