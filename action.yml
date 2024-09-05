@@ -109,7 +109,7 @@ runs:
         push: always
         skipContainerUserIdUpdate: true
         runCmd: ls -al /home/runner
-        imageTag: spin-${{ env.SITEID }}
+        imageTag: spin-${{ env.ID }}
         imageName: ${{ inputs.image_name }}
         configFile: ${{ github.action_path }}/.devcontainer.json
         env: |
