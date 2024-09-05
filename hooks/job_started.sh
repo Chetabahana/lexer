@@ -84,7 +84,7 @@ else
   rm -rf ${GITHUB_WORKSPACE} && git clone --single-branch -b ${GITHUB_REF_NAME} ${REMOTE_REPO}
 
   git config --global --add safe.directory ${GITHUB_WORKSPACE} && cd ${GITHUB_WORKSPACE}
-  git commit --allow-empty -m "rerun actions" && git push
+  git commit --allow-empty -m "rerun actions due to missing platform" && git push
 
   if [ $? -eq 0 ]; then exit 1; fi
 
