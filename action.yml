@@ -83,9 +83,9 @@ runs:
           choco install yq
         else
           cat ${{ github.action_path }}/Dockerfile
-          BASE_NAME=$(basename ${{ inputs.image_name }}) && cat ${GITHUB_ENV} && echo "gak jelas"
-          while IFS= read -r line; do echo "$line" >> ${{ github.workspace }}/_site/.env; done < ${GITHUB_ENV}
-          cat ${{ github.workspace }}/_site/.env && sudo mv -f ${{ github.workspace }}/_site ${{ github.action_path }}/       
+          BASE_NAME=$(basename ${{ inputs.image_name }})
+          echo 'TARGET_REPOSITORY='${{ env.TARGET_REPOSITORY }} >> ${{ github.workspace }}/_site/.env
+          sudo mv -f ${{ github.workspace }}/_site ${{ github.action_path }}/ && cat ${{ github.action_path }}/_site/.env
         fi
 
         IFS=', '; array=($(curl -L -s 'https://registry.hub.docker.com/v2/repositories/${{ inputs.image_name }}/tags?page_size=1024' | jq -rc '."results"[]["name"]' | yq eval -P | sed "s/ /, /g")) 
