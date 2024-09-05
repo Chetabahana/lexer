@@ -22,7 +22,6 @@ echo -e "\n$hr\nDisk Structure\n$hr"
 df -h
 
 echo -e "\n$hr\nRunner 🏠 dir\n$hr"
-cat /home/runner/_site/.env
 set -a && . /home/runner/_site/.env && set +a
 ls -al /home/runner && ls -al /home/runner/_site
 
