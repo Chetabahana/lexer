@@ -82,10 +82,9 @@ runs:
         if [[ "$RUNNER_OS" == "Windows" ]]; then
           choco install yq
         else
-          cat ${{ github.action_path }}/Dockerfile
           BASE_NAME=$(basename ${{ inputs.image_name }})
           echo 'TARGET_REPOSITORY='${{ env.TARGET_REPOSITORY }} >> ${{ github.workspace }}/_site/.env
-          sudo mv -f ${{ github.workspace }}/_site ${{ github.action_path }}/ && cat ${{ github.action_path }}/_site/.env
+          sudo mv -f ${{ github.workspace }}/_site ${{ github.action_path }}/ && cat ${{ github.action_path }}/_site/.env && cat ${{ github.action_path }}/Dockerfile
         fi
 
         IFS=', '; array=($(curl -L -s 'https://registry.hub.docker.com/v2/repositories/${{ inputs.image_name }}/tags?page_size=1024' | jq -rc '."results"[]["name"]' | yq eval -P | sed "s/ /, /g")) 
