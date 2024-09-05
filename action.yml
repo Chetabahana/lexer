@@ -62,7 +62,7 @@ inputs:
     required: false
 
 outputs:
-  target:
+  decays:
     description: 'The target repository'
     value: ${{ env.TARGET_REPOSITORY }}
 
