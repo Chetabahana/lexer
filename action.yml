@@ -62,9 +62,12 @@ inputs:
     required: false
 
 outputs:
+  command:
+    description: 'The command.outputs'
+    value: ${{ steps.command.outputs.stdout }}
   decays:
     description: 'The target repository'
-    value: ${{ steps.command.outputs.stdout }}
+    value: ${{ env.RUNNER_OS }}
 
 runs:
   using: composite
