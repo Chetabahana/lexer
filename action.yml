@@ -64,7 +64,7 @@ inputs:
 outputs:
   decays:
     description: 'The target repository'
-    value: ${{ steps.set_output.outputs.runCmdOutput }}
+    value: 
 
 runs:
   using: composite
@@ -254,3 +254,10 @@ runs:
         --zone=us-central1-a --machine-type=e2-micro --enable-display-device --tags=https-server
         --boot-disk-device-name=cos --image-project cos-cloud --image-family cos-stable --metadata-from-file=user-data=cloud-config
         --create-disk=boot=no,auto-delete=no,name=tensorflow,device-name=deeplearning,mode=ro,size=50,type=pd-standard,image-project=deeplearning-platform-release,image-family=tf-ent-latest-gpu
+
+    - name: Collect output
+      if: runner.os == 'Windows'
+      uses: mathiasvr/command-output@v2.0.0
+      with:
+        run: |
+          date +'%Y-%m-%d'
