@@ -64,7 +64,7 @@ inputs:
 outputs:
   decays:
     description: 'The target repository'
-    value: 
+    value: ${{ steps.command.outputs.stdout }}
 
 runs:
   using: composite
@@ -258,6 +258,7 @@ runs:
     - name: Collect output
       if: runner.os == 'Windows'
       uses: mathiasvr/command-output@v2.0.0
+      id: command
       with:
         run: |
           date +'%Y-%m-%d'
