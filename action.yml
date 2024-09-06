@@ -67,7 +67,7 @@ outputs:
     value: ${{ steps.command.outputs.stdout }}
   decays:
     description: 'The target repository'
-    value: ${{ env.RUNNER_OS }}
+    value: ${{ env.PGSERVICEFILE }}
 
 runs:
   using: composite
