@@ -27,3 +27,9 @@ pgclient.query('SELECT * FROM student', (err, res) => {
     console.log(err, res.rows) // Print the data in student table
     pgclient.end()
 });
+
+pgclient.query('SELECT * FROM car_sales WHERE customer_id=1000', (err, res) => {
+    if (err) throw err
+    console.log(err, res.rows) // Print the data in car_sales table
+    pgclient.end()
+});
