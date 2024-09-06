@@ -247,6 +247,14 @@ runs:
         RUNNER_ID=$(gh api -H "${HEADER}" /repos/${{ github.repository }}/actions/runners --jq '.runners.[].id')
         if (( $TOTAL_COUNT != 0 )); then gh api --method DELETE -H "${HEADER}" /repos/${{ github.repository }}/actions/runners/${RUNNER_ID}; fi 
 
+    - name: Collect output
+      if: runner.os == 'Windows'
+      uses: mathiasvr/command-output@v2.0.0
+      id: command
+      with:
+        run: |
+          date +'%Y-%m-%d'
+
     - name: 🪂 Setup Runner
       if: runner.os == 'Windows'          
       shell: bash
@@ -257,11 +265,3 @@ runs:
         --zone=us-central1-a --machine-type=e2-micro --enable-display-device --tags=https-server
         --boot-disk-device-name=cos --image-project cos-cloud --image-family cos-stable --metadata-from-file=user-data=cloud-config
         --create-disk=boot=no,auto-delete=no,name=tensorflow,device-name=deeplearning,mode=ro,size=50,type=pd-standard,image-project=deeplearning-platform-release,image-family=tf-ent-latest-gpu
-
-    - name: Collect output
-      if: runner.os == 'Windows'
-      uses: mathiasvr/command-output@v2.0.0
-      id: command
-      with:
-        run: |
-          date +'%Y-%m-%d'
