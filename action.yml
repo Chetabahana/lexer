@@ -64,7 +64,7 @@ inputs:
 outputs:
   decays:
     description: 'The target repository'
-    value: ${{ env.TARGET_REPOSITORY }}
+    value: ${{ steps.set_output.outputs.runCmdOutput }}
 
 runs:
   using: composite
@@ -103,6 +103,7 @@ runs:
     - name: 🚀 Initiate Lexer
       if: runner.os != 'Windows'
       uses: devcontainers/ci@v0.3
+      id: set-output
       with:
         push: always
         skipContainerUserIdUpdate: true
