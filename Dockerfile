@@ -80,11 +80,17 @@ RUN cd /tmp && wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1
     #apt-get clean && \
     #rm -rf /var/lib/apt/lists/*
 
-COPY *.txt /tmp/pip-tmp/
-RUN python3 -m pip install --upgrade pip
-RUN rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
-RUN pip install -r /tmp/pip-tmp/requirements-dev.txt
+#COPY *.txt /tmp/pip-tmp/
+#RUN python3 -m pip install --upgrade pip
+#RUN rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
+#RUN pip install -r /tmp/pip-tmp/requirements-dev.txt
   
+# Install dependencies
+#COPY package.json .
+RUN npm install --production && \
+    npm install --production redis talib pg mathjs gauss && \
+    npm cache clean --force
+    
 # Install pgvector and make sure the extension can be loaded
 #RUN wget https://github.com/pgvector/pgvector/archive/refs/tags/v0.2.1.tar.gz
 #RUN tar -xzf v0.2.1.tar.gz && cd pgvector-0.2.1 && make && make install
