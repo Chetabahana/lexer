@@ -88,8 +88,8 @@ RUN cd /tmp && wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1
 # Install dependencies
 #COPY package.json .
 RUN npm install --production && \
-    npm install --production redis talib pg mathjs gauss && \
-    npm cache clean --force
+    npm install --package-lock-only redis talib pg mathjs gauss && \
+    npm ci && npm cache clean --force
     
 # Install pgvector and make sure the extension can be loaded
 #RUN wget https://github.com/pgvector/pgvector/archive/refs/tags/v0.2.1.tar.gz
