@@ -25,11 +25,11 @@ pgclient.query(text, values, (err, res) => {
 pgclient.query('SELECT * FROM student', (err, res) => {
     if (err) throw err
     console.log(err, res.rows) // Print the data in student table
-    pgclient.end()
 });
 
 pgclient.query('SELECT * FROM information_schema.tables', (err, res) => {
     if (err) throw err
     console.log(err, res.rows) // Print the data in car_sales table
-    pgclient.end()
 });
+
+pgclient.end();
