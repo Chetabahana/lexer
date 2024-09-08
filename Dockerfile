@@ -1,6 +1,19 @@
+# Redis image
+FROM redis:latest as redis
+
+# RabbitMQ image
+FROM rabbitmq:latest as rabbitmq
+
+# PostgreSQL image
+FROM postgres:latest as postgres
+
+# Define environment variables for PostgreSQL
+ENV POSTGRES_DB=postgres
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=postgres
+
+FROM node:lts-bookworm-slim as base
 ARG DEBIAN_FRONTEND=noninteractive
-ARG FROM=node:lts-bookworm-slim
-FROM ${FROM}
 
 ENV RUNNER_NAME=""
 ENV RUNNER_TOKEN=""
@@ -120,3 +133,9 @@ ENTRYPOINT ["/home/runner/entrypoint.sh"]
 COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN chmod 644 /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+
+# Build and run the containers
+FROM base as final
+--link redis:redis
+--link rabbitmq:rabbitmq
+--link postgres:postgres
