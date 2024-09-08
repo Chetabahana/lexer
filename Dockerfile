@@ -61,7 +61,8 @@ RUN DEBIAN_FRONTEND=noninteractive \
         openssh-client \
         #plocate \
         #postgresql \
-        python3-pip \
+        #python3-pip \
+        redis-server \
         software-properties-common \
         sudo \
         supervisor \
