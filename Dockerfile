@@ -62,7 +62,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
         #plocate \
         #postgresql \
         #python3-pip \
-        redis-server \
+        #redis-server \
         software-properties-common \
         sudo \
         supervisor \
