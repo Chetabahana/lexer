@@ -158,10 +158,10 @@ runs:
 
             [Service]
             Restart=always
-            ExecStop=/usr/bin/docker exec myweb -s quit
+            ExecStop=/usr/bin/docker exec myredis -s quit
             ExecStart=/usr/bin/docker run --rm \
-              --name myweb --pull=always eq19/maps:build-${{ github.run_number }}
-              #--name=myredis -p 6379:6379 redis
+              #--name myweb --pull=always eq19/maps:build-${{ github.run_number }}
+              --name=myredis -p 6379:6379 redis
 
         - path: /etc/systemd/system/postgres.service
           permissions: 0644
@@ -179,7 +179,7 @@ runs:
               -e POSTGRES_DB=postgres \
               -e POSTGRES_USER=postgres \
               -e POSTGRES_PASSWORD=postgres \
-              -p 5432:5432 -p 6379:6379 \
+              -p 5432:5432 \
               --name=mydb --pull=always eq19/feed:${{ steps.variables.outputs.image_tag }}
 
         - path: /etc/systemd/system/runner.service
