@@ -160,7 +160,7 @@ runs:
             Restart=always
             ExecStop=/usr/bin/docker exec myredis -s quit
             ExecStart=/usr/bin/docker run --rm \
-              --name=myredis -p 6379:6379 redis
+              --name=myredis -p 6379:6379 redis/redis-stack:latest
 
         - path: /etc/systemd/system/postgres.service
           permissions: 0644
