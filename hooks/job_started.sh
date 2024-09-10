@@ -47,8 +47,8 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   echo -e "\n$hr\nDocker info\n$hr"
   /mnt/disks/platform/usr/bin/docker info
   
-  echo -e "\n$hr\nDocker images\n$hr"
-  /mnt/disks/platform/usr/bin/docker image ls
+  echo -e "\n$hr\nFinal Cloud\n$hr"
+  /mnt/disks/platform/usr/bin/gcloud info
   
   echo -e "\n$hr\nDocker containers\n$hr"
   /mnt/disks/platform/usr/bin/docker container ls -a
