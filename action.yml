@@ -78,20 +78,6 @@ runs:
       with:
         credentials_json: ${{ inputs.credentials }}
 
-    - name: 🚀 Initiate Lexer
-      if: runner.os != 'Windows'
-      uses: devcontainers/ci@v0.3
-      id: set-output
-      with:
-        push: always
-        skipContainerUserIdUpdate: true
-        runCmd: ls -al /home/runner
-        imageTag: id-${{ env.ID }}
-        imageName: ${{ inputs.image_name }}
-        configFile: ${{ github.action_path }}/.devcontainer.json
-        env: |
-          TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}
-
     - name: 🪂 Adapt feed mapping
       id: variables
       shell: bash
@@ -117,6 +103,20 @@ runs:
           fi
         done
   
+    - name: 🚀 Initiate Lexer
+      if: runner.os != 'Windows'
+      uses: devcontainers/ci@v0.3
+      id: set-output
+      with:
+        push: always
+        skipContainerUserIdUpdate: true
+        runCmd: ls -al /home/runner
+        imageTag: id-${{ env.ID }}
+        imageName: ${{ inputs.image_name }}
+        configFile: ${{ github.action_path }}/.devcontainer.json
+        env: |
+          TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}
+
     # See https://github.com/thesofproject/sof/blob/main/zephyr/docker-run.sh
     - name: 🪂 Cloud Config
       if: runner.os == 'Windows'
