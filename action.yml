@@ -78,6 +78,20 @@ runs:
       with:
         credentials_json: ${{ inputs.credentials }}
 
+    - name: 🚀 Initiate Lexer
+      if: runner.os != 'Windows'
+      uses: devcontainers/ci@v0.3
+      id: set-output
+      with:
+        push: always
+        skipContainerUserIdUpdate: true
+        runCmd: ls -al /home/runner
+        imageTag: id-${{ env.ID }}
+        imageName: ${{ inputs.image_name }}
+        configFile: ${{ github.action_path }}/.devcontainer.json
+        env: |
+          TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}
+
     - name: 🪂 Adapt feed mapping
       id: variables
       shell: bash
@@ -103,20 +117,6 @@ runs:
           fi
         done
   
-    - name: 🚀 Initiate Lexer
-      if: runner.os != 'Windows'
-      uses: devcontainers/ci@v0.3
-      id: set-output
-      with:
-        push: always
-        skipContainerUserIdUpdate: true
-        runCmd: ls -al /home/runner
-        imageTag: spin-${{ env.ID }}
-        imageName: ${{ inputs.image_name }}
-        configFile: ${{ github.action_path }}/.devcontainer.json
-        env: |
-          TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}
-
     # See https://github.com/thesofproject/sof/blob/main/zephyr/docker-run.sh
     - name: 🪂 Cloud Config
       if: runner.os == 'Windows'
@@ -160,7 +160,7 @@ runs:
             Restart=always
             ExecStop=/usr/bin/docker exec myredis -s quit
             ExecStart=/usr/bin/docker run --rm \
-              --name=myredis -p 6379:6379 --pull=always eq19/maps:build-${{ github.run_number }}
+              --name=myredis -p 6379:6379 --pull=always eq19/maps:target-${{ github.run_number }}
 
         - path: /etc/systemd/system/postgres.service
           permissions: 0644
@@ -178,7 +178,7 @@ runs:
               -e POSTGRES_DB=postgres \
               -e POSTGRES_USER=postgres \
               -e POSTGRES_PASSWORD=postgres \
-              --name=mydb -p 5432:5432 --pull=always eq19/feed:${{ steps.variables.outputs.image_tag }}
+              --name=mydb -p 5432:5432 --pull=always eq19/feed:gr${{ steps.variables.outputs.image_tag }}
 
         - path: /etc/systemd/system/runner.service
           permissions: 0644
@@ -260,7 +260,7 @@ runs:
       shell: bash
       # Ref: https://stackoverflow.com/a/47018417/4058484
       run: >
-        gcloud compute instances create ${{ steps.variables.outputs.image_tag }}
+        gcloud compute instances create gr${{ steps.variables.outputs.image_tag }}
         --service-account=project-owner@feedmapping.iam.gserviceaccount.com
         --zone=us-central1-a --machine-type=e2-micro --enable-display-device --tags=https-server
         --boot-disk-device-name=cos --image-project cos-cloud --image-family cos-stable --metadata-from-file=user-data=cloud-config
