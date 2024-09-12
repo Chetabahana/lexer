@@ -73,19 +73,4 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   #echo -e "\n$hr\nLocate Terraform\n$hr" 
   #find /mnt/disks/platform -type d -name '*terraform*' | sort
 
-else
-
-  cd ${RUNNER_WORKSPACE}
-  
-  git config --global user.name "${GITHUB_ACTOR}"
-  git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-
-  REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-  rm -rf ${GITHUB_WORKSPACE} && git clone --single-branch -b gh-pages ${REMOTE_REPO}
-
-  git config --global --add safe.directory ${GITHUB_WORKSPACE} && cd ${GITHUB_WORKSPACE}
-  git commit --allow-empty -m "rerun actions due to missing platform" && git push
-
-  if [ $? -eq 0 ]; then exit 1; fi
-
 fi        
