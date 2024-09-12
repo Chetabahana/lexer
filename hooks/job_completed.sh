@@ -19,7 +19,7 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   set -a && . /home/runner/_site/.env && set +a
 
   git config --global user.name "${GITHUB_ACTOR}"
-  git config --global --add safe.directory ${GITHUB_WORKSPACE}
+  #git config --global --add safe.directory ${GITHUB_WORKSPACE}
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
   if [[ "${TARGET_REPOSITORY}" == "eq19/eq19.github.io" ]]; then echo "www.eq19.com" > CNAME; fi
