@@ -15,7 +15,7 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   /mnt/disks/platform/usr/bin/docker network inspect bridge
 
   echo -e "\n$hr\nNext Workflow\n$hr"
-  cd /home/runner/_site && touch .nojekyll
+  cd /home/runner/_site #&& touch .nojekyll
   set -a && . /home/runner/_site/.env && set +a
 
   git config --global user.name "${GITHUB_ACTOR}"
