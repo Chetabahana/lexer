@@ -16,7 +16,8 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
 
   echo -e "\n$hr\nNext Workflow\n$hr"
   set -a && . /home/runner/_site/.env && set +a
-
+  cd /home/runner/_site && rm -rf .git && rm -rf .github
+  
   git config --global user.name "${GITHUB_ACTOR}"
   git config --global --add safe.directory ${GITHUB_WORKSPACE}
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
@@ -24,7 +25,6 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   if [[ "${TARGET_REPOSITORY}" == "eq19/eq19.github.io" ]]; then echo "www.eq19.com" > CNAME; fi
   REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${TARGET_REPOSITORY}.git"
 
-  cd /home/runner/_site && rm -rf .git && rm -rf .github
   git init --initial-branch=master > /dev/null && git remote add origin ${REMOTE_REPO}
   git add . && git commit -m "action pages jekyll build" > /dev/null && git push --force ${REMOTE_REPO} master:gh-pages
 
