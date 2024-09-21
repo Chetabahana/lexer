@@ -63,6 +63,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
         #postgresql \
         #python3-pip \
         #redis-server \
+        ruby-full \
         software-properties-common \
         sudo \
         supervisor \
@@ -90,8 +91,7 @@ WORKDIR /home/runner
 ADD _site /home/runner/_site
 
 # Install dependencies
-#COPY package.json .
-#RUN npm install --production
+RUN gem install github-pages --platform=ruby
 RUN npm install --package-lock-only redis talib pg mathjs gauss && \
     npm ci && npm cache clean --force
     
