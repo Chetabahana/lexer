@@ -16,8 +16,10 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
 
   echo -e "\n$hr\nNext Workflow\n$hr"
   set -a && . /home/runner/_site/.env && set +a
+
+  #echo -e "\n$hr\nBUILD\n$hr"
   cd /home/runner/_site && rm -rf .git && rm -rf .github
-  
+
   git config --global user.name "${GITHUB_ACTOR}"
   git config --global --add safe.directory ${GITHUB_WORKSPACE}
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
@@ -28,6 +30,9 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   git init --initial-branch=master > /dev/null && git remote add origin ${REMOTE_REPO}
   git add . && git commit -m "action pages jekyll build" > /dev/null && git push --force ${REMOTE_REPO} master:gh-pages
 
+  #Jekyll Quick Reference https://gist.github.com/DrOctogon/bfb6e392aa5654c63d12
+  #JEKYLL_GITHUB_TOKEN=${{ inputs.token }} DISABLE_WHITELIST=true jekyll build --profile -t -p ${{ github.action_path }}/_plugins -d ${{ github.workspace }}/_site
+  
   echo -e "\njob completed"
 
 fi
