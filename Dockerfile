@@ -63,7 +63,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
         #postgresql \
         #python3-pip \
         #redis-server \
-        ruby-full \
+        #ruby-full \
         software-properties-common \
         sudo \
         supervisor \
@@ -76,22 +76,17 @@ RUN DEBIAN_FRONTEND=noninteractive \
 # Find the most recent 1.1 libssl package in the ubuntu archives
 RUN cd /tmp && wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
     dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
-
-# Install Docker Engine
-#RUN curl -fsSL https://get.docker.com -o- | sh && \
-    #apt-get clean && \
-    #rm -rf /var/lib/apt/lists/*
-
-#COPY *.txt /tmp/pip-tmp/
-#RUN python3 -m pip install --upgrade pip
-#RUN rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
-#RUN pip install -r /tmp/pip-tmp/requirements-dev.txt
   
 WORKDIR /home/runner
 ADD _site /home/runner/_site
 
 # Install dependencies
-RUN gem install github-pages --platform=ruby
+#COPY *.txt /tmp/pip-tmp/
+#RUN python3 -m pip install --upgrade pip
+#RUN gem install github-pages --platform=ruby
+#RUN curl -fsSL https://get.docker.com -o- | sh
+#RUN rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
+#RUN pip install -r /tmp/pip-tmp/requirements-dev.txt
 RUN npm install --package-lock-only redis talib pg mathjs gauss && \
     npm ci && npm cache clean --force
     
