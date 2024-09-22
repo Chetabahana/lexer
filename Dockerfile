@@ -63,7 +63,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
         #postgresql \
         #python3-pip \
         #redis-server \
-        #ruby-full \
+        ruby-full \
         software-properties-common \
         sudo \
         supervisor \
@@ -83,7 +83,7 @@ ADD _site /home/runner/_site
 
 # Install dependencies
 #RUN python3 -m pip install --upgrade pip
-#RUN gem install github-pages --platform=ruby
+RUN gem install github-pages --platform=ruby
 #RUN curl -fsSL https://get.docker.com -o- | sh
 #RUN rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 #RUN pip install -r /tmp/pip-tmp/requirements-dev.txt
