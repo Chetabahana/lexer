@@ -78,10 +78,10 @@ RUN cd /tmp && wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1
     dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
   
 WORKDIR /home/runner
+COPY *.txt /tmp/pip-tmp/
 ADD _site /home/runner/_site
 
 # Install dependencies
-#COPY *.txt /tmp/pip-tmp/
 #RUN python3 -m pip install --upgrade pip
 #RUN gem install github-pages --platform=ruby
 #RUN curl -fsSL https://get.docker.com -o- | sh
