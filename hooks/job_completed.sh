@@ -29,8 +29,7 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   git config --global user.name "${GITHUB_ACTOR}"
   git config --global --add safe.directory "/home/runner/_site"
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-  #rm -rf .git && git init --initial-branch=master > /dev/null && git remote add origin ${REMOTE_REPO}
-  git add . && git commit --allow-empty -m "disable unstopped auto regeneration" > /dev/null && git push
+  git add . && git commit --allow-empty -m "${LATEST_COMMIT}" > /dev/null && git push
 
   echo -e "\njob completed"
 
