@@ -29,7 +29,7 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   git config --global --add safe.directory "/home/runner/_site"
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
   #rm -rf .git && git init --initial-branch=master > /dev/null && git remote add origin ${REMOTE_REPO}
-  git add . && git commit -m "action pages jekyll build" > /dev/null && git push --force ${REMOTE_REPO} master:gh-pages
+  git add . && git commit -m "action pages jekyll build" > /dev/null && git push
 
   echo -e "\njob completed"
 
