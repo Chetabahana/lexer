@@ -115,9 +115,9 @@ runs:
       id: set-output
       with:
         push: always
-        skipContainerUserIdUpdate: true
-        runCmd: ls -al /home/runner
         imageTag: id-${{ env.ID }}
+        skipContainerUserIdUpdate: true
+        runCmd: ls -alR /home/runner/_site
         imageName: ${{ inputs.image_name }}
         configFile: ${{ github.action_path }}/.devcontainer.json
         env: |
