@@ -93,7 +93,7 @@ runs:
 
           rm -rf ${{ github.action_path }}/_site/.devcontainer.json ${{ github.action_path }}/_site/Dockerfile
           echo "TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}" > ${{ github.action_path }}/_site/.env
-          echo "LATEST_COMMIT=${{ env.LATEST_COMMIT }}" >> ${{ github.action_path }}/_site/.env 
+          echo "LATEST_COMMIT=\"${{ env.LATEST_COMMIT }}\"" >> ${{ github.action_path }}/_site/.env 
           cat ${{ github.action_path }}/_site/.env && cat ${{ github.action_path }}/Dockerfile
         fi
 
