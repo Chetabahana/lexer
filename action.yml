@@ -221,28 +221,6 @@ runs:
         - mount -o nosuid,nodev,commit=30,defaults -t ext4 /dev/sdb1 /mnt/disks/platform
         EOL
         
-    - name: Remove Existing Self-Hosted Runner
-      if: runner.os == 'Windows'
-      shell: bash
-      run: |
-        gcloud info
-        HEADER="Accept: application/vnd.github+json"
-        echo ${{ inputs.token }} | gh auth login --with-token
-
-        for instance_uri in $(gcloud compute instances list --uri 2> /dev/null); do
-          instance_name=${instance_uri##*/}
-          instance_zone_uri=${instance_uri/\/instances\/${instance_name}/}
-          instance_zone=${instance_zone_uri##*/}
-          if [ -n "${instance_name}" ] && [ -n "${instance_zone}" ] && gcloud compute instances delete ${instance_name} --zone ${instance_zone} --quiet; then
-            echo "deleted: ${instance_zone}/${instance_name}"
-          fi
-        done
-
-        #See: https://docs.github.com/en/rest/actions/self-hosted-runners
-        TOTAL_COUNT=$(gh api -H "${HEADER}" /repos/${{ github.repository }}/actions/runners --jq '.total_count')
-        RUNNER_ID=$(gh api -H "${HEADER}" /repos/${{ github.repository }}/actions/runners --jq '.runners.[].id')
-        if (( $TOTAL_COUNT != 0 )); then gh api --method DELETE -H "${HEADER}" /repos/${{ github.repository }}/actions/runners/${RUNNER_ID}; fi 
-
     - name: Collect output
       if: runner.os == 'Windows'
       uses: mathiasvr/command-output@v2.0.0
