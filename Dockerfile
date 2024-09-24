@@ -22,6 +22,7 @@ ENV ACTIONS_RUNNER_HOOK_JOB_STARTED=/opt/runner/job_started.sh
 ENV ACTIONS_RUNNER_HOOK_JOB_COMPLETED=/opt/runner/job_completed.sh
 
 ADD hooks /opt/runner
+COPY *.txt /tmp/apt-get/
 RUN chmod +x /opt/runner/*.sh
 #RUN mkdir -p $AGENT_TOOLSDIRECTORY
 
@@ -41,44 +42,15 @@ LABEL maintainer="me@tcardonne.fr" \
 #COPY conf/postgresql.conf /etc/postgresql/postgresql.conf
 #COPY conf/docker-entrypoint-initdb.d/* /docker-entrypoint-initdb.d/        
 
-RUN DEBIAN_FRONTEND=noninteractive \
-    apt-get update && apt-get install -y \
-        apt-transport-https \
-        build-essential \
-        ca-certificates \
-        curl \
-        #docker.io \
-        gettext \
-        gh \
-        git \
-        iputils-ping \
-        liblttng-ust1 \
-        libcurl4-openssl-dev \
-        libpq-dev \
-        iputils-ping \
-        jq \
-        #npm \
-        openssh-client \
-        #plocate \
-        #postgresql \
-        #python3-pip \
-        #redis-server \
-        ruby-full \
-        software-properties-common \
-        sudo \
-        supervisor \
-        unzip \
-        wget \
-        zlib1g-dev && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+    xargs apt-get install < /tmp/apt-get/requirements.txt && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Find the most recent 1.1 libssl package in the ubuntu archives
 RUN cd /tmp && wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
     dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
   
 WORKDIR /home/runner
-COPY *.txt /tmp/pip-tmp/
 ADD _site /home/runner/_site
 
 # Install dependencies
