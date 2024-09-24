@@ -84,7 +84,6 @@ runs:
         if [[ "$RUNNER_OS" == "Windows" ]]; then
           choco install yq
         else
-          BASE_NAME=$(basename ${{ inputs.image_name }})
           git clone --single-branch -b gh-pages https://github.com/${{ env.TARGET_REPOSITORY }} ${{ github.action_path }}/_site &>/dev/null  
           mv -f ${{ github.action_path }}/_site/docs ${RUNNER_TEMP}/ && rm -rf ${{ github.action_path }}/_site/*
           mv -f ${{ github.workspace }}/_site/* ${{ github.action_path }}/_site/
@@ -114,6 +113,7 @@ runs:
       id: variables
       shell: bash
       run: |
+        BASE_NAME=$(basename ${{ inputs.image_name }})
         IFS=', '; array=($(curl -L -s 'https://registry.hub.docker.com/v2/repositories/${{ inputs.image_name }}/tags?page_size=1024' | jq -rc '."results"[]["name"]' | yq eval -P | sed "s/ /, /g")) 
         for ((i=0; i < ${#array[@]}; i++)); do
           if [[ "${array[$i]}" != "latest" ]]; then
