@@ -43,9 +43,8 @@ LABEL maintainer="me@eq19.com" \
 #COPY conf/docker-entrypoint-initdb.d/* /docker-entrypoint-initdb.d/        
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    sed "s/#.*//" /tmp/apt-get/requirements.txt | \
-    xargs apt-get install && apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    sed "s/#.*//" /tmp/apt-get/requirements.txt | xargs apt-get install -y && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Find the most recent 1.1 libssl package in the ubuntu archives
 RUN cd /tmp && wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
