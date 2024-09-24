@@ -26,7 +26,7 @@ COPY *.txt /tmp/apt-get/
 RUN chmod +x /opt/runner/*.sh
 #RUN mkdir -p $AGENT_TOOLSDIRECTORY
 
-LABEL maintainer="me@tcardonne.fr" \
+LABEL maintainer="me@eq19.com" \
     org.label-schema.schema-version="1.0" \
     org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.vcs-ref=$VCS_REF \
@@ -43,7 +43,7 @@ LABEL maintainer="me@tcardonne.fr" \
 #COPY conf/docker-entrypoint-initdb.d/* /docker-entrypoint-initdb.d/        
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    xargs apt-get install < /tmp/apt-get/requirements.txt && \
+    xargs apt-get install < sed "s/#.*//" /tmp/apt-get/requirements.txt && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Find the most recent 1.1 libssl package in the ubuntu archives
