@@ -17,6 +17,7 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
 
   #Jekyll Quick Reference https://gist.github.com/DrOctogon/bfb6e392aa5654c63d12
   REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${TARGET_REPOSITORY}.git"
+  git remote set-url origin ${REMOTE_REPO} && git config --global --add safe.directory "/home/runner/_site"
   JEKYLL_GITHUB_TOKEN=${GITHUB_ACCESS_TOKEN} DISABLE_WHITELIST=true jekyll build --profile -t -p /home/runner/_site/_plugins -d /home/runner/_site/docs
   
   echo -e "\n$hr\nFinal Network\n$hr"
@@ -25,9 +26,7 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   if [[ "${TARGET_REPOSITORY}" == "eq19/eq19.github.io" ]]; then echo "www.eq19.com" > /home/runner/_site/docs/CNAME; fi
 
   echo -e "\n$hr\nNext Workflow\n$hr"
-  git remote set-url origin ${REMOTE_REPO}
   git config --global user.name "${GITHUB_ACTOR}"
-  git config --global --add safe.directory "/home/runner/_site"
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
   git add . && git commit --allow-empty -m "${LATEST_COMMIT}" > /dev/null && git push
 
