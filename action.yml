@@ -117,7 +117,7 @@ runs:
 
     # Ref: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
     - name: 🌀 Cloud Function Deployment 
-      if: runner.os == 'Windows'          
+      if: runner.os == 'Ubuntu'          
       shell: bash
       run: >
         gcloud functions deploy function-3 --runtime=nodejs20
@@ -128,5 +128,6 @@ runs:
     - name: Example of using the output 
       if: runner.os == 'Windows'
       shell: bash
-      run: |
-        curl  -H "Authorization: Bearer $(gcloud auth print-identity-token)" https://
+      run: >
+        curl  -H "Authorization: Bearer $(gcloud auth print-identity-token)"
+        https://us-central1-feedmapping.cloudfunctions.net/function-3
