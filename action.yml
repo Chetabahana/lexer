@@ -120,7 +120,7 @@ runs:
       if: runner.os == 'Windows'          
       run: >
         gcloud functions deploy function-3 --runtime=nodejs20
-        --service-account=project-owner@feedmapping.iam.gserviceaccount.com
+        --run-service-account=project-owner@feedmapping.iam.gserviceaccount.com
         --zone=us-central1-a --source=./.github/functions --allow-unauthenticated
 
     # See https://console.cloud.google.com/functions/list
