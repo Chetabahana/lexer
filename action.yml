@@ -122,7 +122,7 @@ runs:
       run: >
         gcloud functions deploy function-3 --runtime=nodejs20
         --service-account=project-owner@feedmapping.iam.gserviceaccount.com
-        --source="./.github/functions" --allow-unauthenticated --trigger-http
+        --source="./.github/functions" --trigger-http --entry-point=helloGET
 
     # See https://console.cloud.google.com/functions/list
     - name: Example of using the output 
