@@ -128,4 +128,5 @@ runs:
     - name: Example of using the output 
       if: runner.os == 'Windows'
       shell: bash
-      run: 'curl "${{ steps.deploy.outputs.url }}"'
+      run: |
+        curl  -H "Authorization: Bearer $(gcloud auth print-identity-token)" https://
