@@ -119,16 +119,12 @@ runs:
     - name: 🌀 Cloud Function Deployment 
       if: runner.os == 'Windows'          
       run: >
-        gcloud compute instances create grid-${{ steps.variables.outputs.image_tag }}
+        gcloud functions deploy function-3 --runtime=nodejs20
         --service-account=project-owner@feedmapping.iam.gserviceaccount.com
-        --zone=us-central1-a --machine-type=e2-micro --enable-display-device --tags=https-server
-        --name function-2
-        --runtime: nodejs20
-        --source_dir: ./.github/functions
+        --zone=us-central1-a --source=./.github/functions
 
     # See https://console.cloud.google.com/functions/list
     - name: Example of using the output 
       if: runner.os == 'Windows'
       shell: bash
       run: 'curl "${{ steps.deploy.outputs.url }}"'
-  
