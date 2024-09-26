@@ -121,7 +121,7 @@ runs:
       shell: bash
       run: >
         gcloud functions deploy function-3 --runtime=nodejs20
-        --build-service-account=project-owner@feedmapping.iam.gserviceaccount.com
+        --service-account=project-owner@feedmapping.iam.gserviceaccount.com
         --source="./.github/functions" --allow-unauthenticated --trigger-http
 
     # See https://console.cloud.google.com/functions/list
