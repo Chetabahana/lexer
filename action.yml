@@ -119,10 +119,10 @@ runs:
     - name: 🌀 Cloud Function Deployment 
       if: runner.os == 'Ubuntu'          
       shell: bash
-      run: >
-        gcloud functions deploy function-3 --runtime=nodejs20
-        --service-account=project-owner@feedmapping.iam.gserviceaccount.com
-        --source="./.github/functions" --trigger-http --entry-point=helloGET
+      run: |
+        gcloud functions deploy function-3 --runtime=nodejs20 --gen2 \
+          --service-account=project-owner@feedmapping.iam.gserviceaccount.com \
+          --source="./.github/functions" --trigger-http --entry-point=helloGET
 
     # See https://console.cloud.google.com/functions/list
     - name: Example of using the output 
