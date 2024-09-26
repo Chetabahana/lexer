@@ -122,14 +122,14 @@ runs:
       run: |
         gcloud functions deploy function-3 --runtime=nodejs20 --gen2 \
           --service-account=project-owner@feedmapping.iam.gserviceaccount.com \
-          --source="./.github/functions" --trigger-http --entry-point=helloGET
+          --region="us-central1" --source="./.github/functions" --trigger-http --entry-point=helloGET
 
     # See https://console.cloud.google.com/functions/list
     - name: Example of using the output 
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        gcloud functions describe nodejs-http-function --gen2 --region REGION --format="value(url)"
+        gcloud functions describe nodejs-http-function --gen2 --region="us-central1" --format="value(url)"
         curl -m 70 -X POST https://us-central1-feedmapping.cloudfunctions.net/function-3 \
           -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
           -H "Content-Type: application/json" \
