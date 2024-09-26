@@ -73,21 +73,18 @@ runs:
   using: composite
   steps:
     - name: 🪂 Adapt feed mapping
+      if: runner.os != 'Windows'
       shell: bash
       run: |
-        if [[ "$RUNNER_OS" == "Windows" ]]; then
-          choco install yq
-        else
-          git clone --single-branch -b gh-pages https://github.com/${{ env.TARGET_REPOSITORY }} ${{ github.action_path }}/_site &>/dev/null  
-          mv -f ${{ github.action_path }}/_site/docs ${RUNNER_TEMP}/ && rm -rf ${{ github.action_path }}/_site/*
-          mv -f ${{ github.workspace }}/_site/* ${{ github.action_path }}/_site/
-          mv -f ${RUNNER_TEMP}/docs ${{ github.action_path }}/_site/
+        git clone --single-branch -b gh-pages https://github.com/${{ env.TARGET_REPOSITORY }} ${{ github.action_path }}/_site &>/dev/null  
+        mv -f ${{ github.action_path }}/_site/docs ${RUNNER_TEMP}/ && rm -rf ${{ github.action_path }}/_site/*
+        mv -f ${{ github.workspace }}/_site/* ${{ github.action_path }}/_site/
+        mv -f ${RUNNER_TEMP}/docs ${{ github.action_path }}/_site/
 
-          rm -rf ${{ github.action_path }}/_site/.devcontainer.json ${{ github.action_path }}/_site/Dockerfile
-          echo 'TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}' > ${{ github.action_path }}/_site/.env
-          echo 'LATEST_COMMIT=${{ env.LATEST_COMMIT }}' >> ${{ github.action_path }}/_site/.env 
-          cat ${{ github.action_path }}/_site/.env && cat ${{ github.action_path }}/Dockerfile
-        fi
+        rm -rf ${{ github.action_path }}/_site/.devcontainer.json ${{ github.action_path }}/_site/Dockerfile
+        echo 'TARGET_REPOSITORY=${{ env.TARGET_REPOSITORY }}' > ${{ github.action_path }}/_site/.env
+        echo 'LATEST_COMMIT=${{ env.LATEST_COMMIT }}' >> ${{ github.action_path }}/_site/.env 
+        cat ${{ github.action_path }}/_site/.env && cat ${{ github.action_path }}/Dockerfile
 
     - name: 🚀 Initiate Lexer
       if: runner.os != 'Windows'
