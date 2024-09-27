@@ -120,19 +120,18 @@ runs:
       if: runner.os == 'Windows'          
       shell: bash
       run: |
-        gcloud functions deploy function-4 --runtime=nodejs20 --gen2 \
+        gcloud functions deploy function-5 --runtime=nodejs20 --gen2 --entry-point=helloGET \
           --service-account=project-owner@feedmapping.iam.gserviceaccount.com \
-          --region="us-central1" --trigger-http --source="./.github/functions" \
-          #--serve-all-traffic-latest-revision \
-          --entry-point=helloGET
+          --region="us-central1" --source="./.github/functions" \
+          --trigger-http --no-allow-unauthenticated
 
     # See https://console.cloud.google.com/functions/list
     - name: Example of using the output 
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        gcloud functions describe function-4 --gen2 --region="us-central1" --format="value(url)"
-        curl -m 70 -X POST https://us-central1-feedmapping.cloudfunctions.net/function-4 \
+        gcloud functions describe function-5 --gen2 --region="us-central1" --format="value(url)"
+        curl -m 70 -X POST https://us-central1-feedmapping.cloudfunctions.net/function-5 \
           -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
           -H "Content-Type: application/json" \
-          -d '{}'
+          -d '{}'5
