@@ -120,10 +120,10 @@ runs:
       if: runner.os == 'Windows'          
       shell: bash
       run: |
-        gcloud functions deploy function-6 --runtime=python312 --gen2 --entry-point=hello_get \
+        gcloud functions deploy function-6 --gen2 --runtime=python312 --trigger-http \
           --service-account=project-owner@feedmapping.iam.gserviceaccount.com \
-          --region="us-central1" --source="./.github/functions" \
-          --trigger-http --no-allow-unauthenticated
+          --region="us-central1" --no-allow-unauthenticated \
+          --source="./.github/functions" --entry-point=hello_get
 
     # See https://console.cloud.google.com/functions/list
     - name: Example of using the output 
