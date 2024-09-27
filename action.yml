@@ -130,8 +130,7 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        gcloud functions describe function-5 --gen2 --region="us-central1" --format="value(url)"
-        curl -m 70 -X POST https://us-central1-feedmapping.cloudfunctions.net/function-5 \
+        curl -m 70 -X POST $(gcloud functions describe function-5 --gen2 --region="us-central1" --format="value(url)") \
           -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
           -H "Content-Type: application/json" \
           -d '{}'5
