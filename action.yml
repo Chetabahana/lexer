@@ -130,7 +130,7 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        curl -m 70 -X POST $(gcloud functions describe function-5 --gen2 --region="us-central1" --format="value(url)") \
+        curl -s -X POST $(gcloud functions describe function-5 --gen2 --region="us-central1" --format="value(url)") \
           -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
           -H "Content-Type: application/json" \
           -d '{}'5
