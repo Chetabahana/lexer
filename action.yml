@@ -115,16 +115,6 @@ runs:
           fi
         done
 
-    # Ref: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
-    - name: 🌀 Cloud Function Deployment 
-      if: runner.os == 'Ubuntu'          
-      shell: bash
-      run: |
-        gcloud functions deploy function --gen2 --runtime=python312 --trigger-http \
-          --service-account=project-owner@feedmapping.iam.gserviceaccount.com \
-          --region="us-central1" --no-allow-unauthenticated \
-          --source="./.github/functions" --entry-point=hello_get
-
     # See https://console.cloud.google.com/functions/list
     - name: Example of using the output 
       if: runner.os == 'Windows'
