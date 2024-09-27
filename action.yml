@@ -122,8 +122,9 @@ runs:
       run: |
         gcloud functions deploy function-4 --runtime=nodejs20 --gen2 \
           --service-account=project-owner@feedmapping.iam.gserviceaccount.com \
-          --region="us-central1" --serve-all-traffic-latest-revision --trigger-http \ 
-          --source="./.github/functions" --entry-point=helloGET
+          --region="us-central1" --trigger-http --source="./.github/functions" \
+          #--serve-all-traffic-latest-revision \
+          --entry-point=helloGET
 
     # See https://console.cloud.google.com/functions/list
     - name: Example of using the output 
