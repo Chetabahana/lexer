@@ -117,10 +117,10 @@ runs:
 
     # Ref: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
     - name: 🌀 Cloud Function Deployment 
-      if: runner.os == 'Ubuntu'          
+      if: runner.os == 'Windows'          
       shell: bash
       run: |
-        gcloud functions deploy function-5 --runtime=nodejs20 --gen2 --entry-point=helloGET \
+        gcloud functions deploy function-6 --runtime=python312 --gen2 --entry-point=hello_get \
           --service-account=project-owner@feedmapping.iam.gserviceaccount.com \
           --region="us-central1" --source="./.github/functions" \
           --trigger-http --no-allow-unauthenticated
@@ -130,7 +130,7 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        curl -s -X POST $(gcloud functions describe function-5 --gen2 --region="us-central1" --format="value(url)") \
+        curl -s -X POST $(gcloud functions describe function-6 --gen2 --region="us-central1" --format="value(url)") \
           -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
           -H "Content-Type: application/json" \
           -d '{}'5
