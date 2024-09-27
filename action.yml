@@ -117,7 +117,7 @@ runs:
 
     # Ref: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
     - name: 🌀 Cloud Function Deployment 
-      if: runner.os == 'Windows'          
+      if: runner.os == 'Ubuntu'          
       shell: bash
       run: |
         gcloud functions deploy function-5 --runtime=nodejs20 --gen2 --entry-point=helloGET \
