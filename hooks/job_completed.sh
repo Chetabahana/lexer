@@ -20,12 +20,11 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   #JEKYLL_GITHUB_TOKEN=${GITHUB_ACCESS_TOKEN} DISABLE_WHITELIST=true jekyll build --profile -t -p /home/runner/_site/_plugins -d /home/runner/_site/docs
   
   echo -e "\n$hr\nBuilded Pages\n$hr"
-  ls -al /home/runner/_site/docs
+  if [[ "${TARGET_REPOSITORY}" == "eq19/eq19.github.io" ]]; then echo "www.eq19.com" > /home/runner/_site/docs/CNAME; fi
+  touch /home/runner/_site/docs/.nojekyll && ls -al /home/runner/_site/docs
 
   echo -e "\n$hr\nFinal Network\n$hr"
-  touch /home/runner/_site/docs/.nojekyll
   /mnt/disks/platform/usr/bin/docker network inspect bridge
-  if [[ "${TARGET_REPOSITORY}" == "eq19/eq19.github.io" ]]; then echo "www.eq19.com" > /home/runner/_site/docs/CNAME; fi
 
   echo -e "\n$hr\nNext Workflow\n$hr"
   git config --global user.name "${GITHUB_ACTOR}"
