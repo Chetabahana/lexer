@@ -11,7 +11,6 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   echo -e "\n$hr\nDocker images\n$hr"
   /mnt/disks/platform/usr/bin/docker image ls
 
-  echo -e "\n$hr\nBuild Pages\n$hr"
   cd /home/runner/_site && rm -rf .github
   set -a && . /home/runner/_site/.env && set +a
 
@@ -20,6 +19,9 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   git remote set-url origin ${REMOTE_REPO} && git config --global --add safe.directory "/home/runner/_site"
   #JEKYLL_GITHUB_TOKEN=${GITHUB_ACCESS_TOKEN} DISABLE_WHITELIST=true jekyll build --profile -t -p /home/runner/_site/_plugins -d /home/runner/_site/docs
   
+  echo -e "\n$hr\nBuilded Pages\n$hr"
+  ls -al /home/runner/_site/docs
+
   echo -e "\n$hr\nFinal Network\n$hr"
   touch /home/runner/_site/docs/.nojekyll
   /mnt/disks/platform/usr/bin/docker network inspect bridge
