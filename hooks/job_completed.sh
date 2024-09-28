@@ -8,9 +8,6 @@ df -h
 
 if [ -d /mnt/disks/platform/usr/local/sbin ]; then
     
-  echo -e "\n$hr\nDocker images\n$hr"
-  /mnt/disks/platform/usr/bin/docker image ls
-
   cd /home/runner/_site && rm -rf .github
   set -a && . /home/runner/_site/.env && set +a
 
@@ -22,6 +19,9 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   echo -e "\n$hr\nBuilded Pages\n$hr"
   if [[ "${TARGET_REPOSITORY}" == "eq19/eq19.github.io" ]]; then echo "www.eq19.com" > /home/runner/_site/docs/CNAME; fi
   touch /home/runner/_site/docs/.nojekyll && ls -al /home/runner/_site/docs
+
+  echo -e "\n$hr\nDocker images\n$hr"
+  /mnt/disks/platform/usr/bin/docker image ls
 
   echo -e "\n$hr\nFinal Network\n$hr"
   /mnt/disks/platform/usr/bin/docker network inspect bridge
