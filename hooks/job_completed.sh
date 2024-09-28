@@ -31,6 +31,11 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
   git add . && git commit --allow-empty -m "${LATEST_COMMIT}" > /dev/null && git push
 
-  echo -e "\njob completed"
+  if [ $? -eq 0 ]; then
+    echo -e "\njob completed"
+  else
+    REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+    cd ${GITHUB_WORKSPACE} && git add . && git commit --allow-empty -m "rerun actions due to commit rejection" && git push
+  fi
 
 fi
