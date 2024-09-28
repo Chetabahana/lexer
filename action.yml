@@ -120,8 +120,7 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        gcloud functions describe function --gen2 --region="us-central1" --format="value(serviceConfig.uri)"
         curl -s -X POST $(gcloud functions describe function --gen2 --region="us-central1" --format="value(serviceConfig.uri)") \
           -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
           -H "Content-Type: application/json" \
-          -d '{}'
+          -d '{}' | jq '.'
