@@ -121,7 +121,8 @@ runs:
       shell: bash
       run: |
         #QUERY="SELECT pos FROM 'feedmapping.mydataset.roots' WHERE key < 17"
+	#--data-raw '{"context":{"client":{"clientName":"WEB_REMIX","clientVersion":"1.20240904.01.01"}},"query":"QUERY","params":"EgWKAQIIAWoSEAMQBBAJEA4QChAFEBEQEBAV"}' | jq --compact-output '.'
 	curl -s -X POST ${{ env.DATASET_URL }} \
           -H "Content-Type: application/json" \
 	  -H "Authorization: Bearer $(gcloud auth print-identity-token)" \        
-          --data-raw '{"context":{"client":{"clientName":"WEB_REMIX","clientVersion":"1.20240904.01.01"}},"query":"QUERY","params":"EgWKAQIIAWoSEAMQBBAJEA4QChAFEBEQEBAV"}' | jq --compact-output '.'
+          -d {} | jq '.'
