@@ -124,4 +124,4 @@ runs:
 	curl -s -X POST ${{ env.DATASET_URL }} \
           -H "Content-Type: application/json" \
 	  -H "Authorization: Bearer $(gcloud auth print-identity-token)" \        
-          --data-raw '{"context":{"client":{"clientName":"WEB_REMIX","clientVersion":"1.20240904.01.01"}},"query":"'"$QUERY"'","params":"EgWKAQIIAWoSEAMQBBAJEA4QChAFEBEQEBAV"}' | jq --compact-output '.'
+          --data-raw '{"context":{"client":{"clientName":"WEB_REMIX","clientVersion":"1.20240904.01.01"}},"query":"QUERY","params":"EgWKAQIIAWoSEAMQBBAJEA4QChAFEBEQEBAV"}' | jq --compact-output '.'
