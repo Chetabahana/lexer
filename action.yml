@@ -120,7 +120,7 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        IDENTITY=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token" -H "Metadata-Flavor: Google")
+        IDENTITY=$(python ./.github/entrypoint/gcp_token.py)
         curl -s -X POST ${{ env.DATASET_URL }} \
           -H "Authorization: Bearer $IDENTITY" \
           -H "Content-Type: application/json" \
