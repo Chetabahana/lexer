@@ -120,7 +120,7 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        curl -s -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
+        curl -s -X POST ${{ env.DATASET_URL }} \
+          -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
           -H "Content-Type: application/json" \
-          -X POST ${{ env.DATASET_URL }} \
           -d '{}' | jq '.'
