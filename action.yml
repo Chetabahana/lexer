@@ -120,7 +120,7 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        QUERY=$1
+        QUERY=`SELECT pos FROM \`feedmapping.mydataset.roots\` WHERE key < 17`;
 	curl -s -X POST ${{ env.DATASET_URL }} \
           -H "Content-Type: application/json" \
 	  -H "Authorization: Bearer $(gcloud auth print-identity-token)" \        
