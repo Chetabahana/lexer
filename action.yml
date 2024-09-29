@@ -120,9 +120,7 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        #python -m pip -q install google.auth.transport.requests google.oauth2.id_token
-        IDENTITY=$(python ./.github/entrypoint/gcp_token.py)
         curl -s -X POST ${{ env.DATASET_URL }} \
-          -H "Authorization: Bearer $IDENTITY" \
+          -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
           -H "Content-Type: application/json" \
           -d '{}' | jq '.'
