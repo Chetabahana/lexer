@@ -120,9 +120,8 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        curl "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=${{ env.DATASET_URL }}" \
-          -H "Metadata-Flavor: Google"
+        IDENTITY=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=${{ env.DATASET_URL }}" -H "Metadata-Flavor: Google")
         curl -s -X POST ${{ env.DATASET_URL }} \
-          -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
+          -H "Authorization: Bearer $IDENTITY" \
           -H "Content-Type: application/json" \
           -d '{}' | jq '.'
