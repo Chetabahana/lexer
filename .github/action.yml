@@ -105,18 +105,18 @@ runs:
       id: 'auth'
       uses: 'google-github-actions/auth@v2'
       with:
+        token_format: 'id_token'
         credentials_json: ${{ inputs.credentials }}
+        id_token_audience: 'https://us-central1-feedmapping.cloudfunctions.net/function'
 
+    #Ref: https://github.com/google-github-actions/auth/blob/main/docs/EXAMPLES.md#generating-an-id-token-jwt
     - name: Run identity
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        python -m pip -q install google.auth requests
-        IDENTITY=$(python ./.github/entrypoint/gcp_token.py)
+        IDENTITY=${{ steps.auth.outputs.id_token }}
         curl -s -X POST https://us-central1-feedmapping.cloudfunctions.net/function \
-          -H "Authorization: Bearer $IDENTITY" \
-          -H "Content-Type: application/json" \
-          -d '{}'
+          -H "Authorization: Bearer $IDENTITY" -H "Content-Type: application/json" -d '{}'
 
     - name: 💎 Setup Gcloud
       if: runner.os == 'Windows'
@@ -145,4 +145,3 @@ runs:
       uses: actions/github-script@v7
       with:
         script: console.log(context)
-
