@@ -115,7 +115,7 @@ runs:
           fi
         done
 
-    # See https://console.cloud.google.com/functions/list
+    # See https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/monitoring-and-troubleshooting-self-hosted-runners
     - name: Example of using the output 
       if: runner.os == 'Ubuntu'
       shell: bash
