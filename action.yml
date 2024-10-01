@@ -117,7 +117,7 @@ runs:
 
     # See https://console.cloud.google.com/functions/list
     - name: Example of using the output 
-      if: runner.os == 'Windows'
+      if: runner.os == 'Ubuntu'
       shell: bash
       run: |
         curl -s -X POST ${{ env.DATASET_URL }} \
