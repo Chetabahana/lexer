@@ -115,7 +115,7 @@ runs:
           fi
         done
 
-    # See https://docs.github.com
+    # See https://docs.github.com/en/actions/guides
     - name: Example of using the output 
       if: runner.os == 'Ubuntu'
       shell: bash
