@@ -136,7 +136,7 @@ runs:
 
     # Example of using the output
     - id: 'test'
-      if: runner.os == 'Windowa'
+      if: runner.os == 'Windows'
       run: |-
         echo '${{ steps.compute-ssh.outputs.stdout }}'
         echo '${{ steps.compute-ssh.outputs.stderr }}'
