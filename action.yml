@@ -117,7 +117,7 @@ runs:
 
     # See https://docs.github.com/en/actions/guides
     - name: Example of using the output 
-      if: runner.os == 'Ubuntu'
+      if: runner.os == '-Windows'
       shell: bash
       run: |
         curl -s -X POST ${{ env.DATASET_URL }} \
@@ -127,7 +127,7 @@ runs:
 
     - id: 'compute-ssh'
       uses: 'google-github-actions/ssh-compute@v1'
-      if: runner.os == 'Windows'
+      if: runner.os == '-Windows'
       with:
         instance_name: 'grid-5'
         zone: 'us-central1-a'
@@ -136,7 +136,7 @@ runs:
 
     # Example of using the output
     - id: 'test'
-      if: runner.os == 'Windows'
+      if: runner.os == '-Windows'
       shell: bash
       run: |-
         echo '${{ steps.compute-ssh.outputs.stdout }}'
