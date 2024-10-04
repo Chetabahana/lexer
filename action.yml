@@ -142,6 +142,7 @@ runs:
         echo '${{ steps.compute-ssh.outputs.stdout }}'
         echo '${{ steps.compute-ssh.outputs.stderr }}'
 
+    #Ref: https://gist.github.com/xtrmstep/92aab2d465e348ce1c07ed903ca0dfb8
     - id: describe
       if: runner.os == 'Windows'
       shell: bash
