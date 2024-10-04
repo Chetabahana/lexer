@@ -143,9 +143,8 @@ runs:
         echo '${{ steps.compute-ssh.outputs.stderr }}'
 
     - id: 'ip22'
-      if: runner.os == '-Windows'
+      if: runner.os == 'Windows'
       shell: bash
       run: |-
         gcloud compute instances list
-        gcloud compute instances describe 'instance name' --zone=us-central1-a
-
+        gcloud compute instances describe 'grid-1' --zone=us-central1-a
