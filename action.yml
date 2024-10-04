@@ -115,33 +115,6 @@ runs:
           fi
         done
 
-    # See https://docs.github.com/en/actions/guides
-    - name: Example of using the output 
-      if: runner.os == '-Windows'
-      shell: bash
-      run: |
-        curl -s -X POST ${{ env.DATASET_URL }} \
-          -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
-          -H "Content-Type: application/json" \
-          -d '{}' | jq '.'
-
-    - id: 'compute-ssh'
-      uses: 'google-github-actions/ssh-compute@v1'
-      if: runner.os == '-Windows'
-      with:
-        instance_name: 'grid-5'
-        zone: 'us-central1-a'
-        ssh_private_key: '${{ inputs.initiate_pauli.private_key }}'
-        command: 'echo Hello world'
-
-    # Example of using the output
-    - id: 'test'
-      if: runner.os == '-Windows'
-      shell: bash
-      run: |-
-        echo '${{ steps.compute-ssh.outputs.stdout }}'
-        echo '${{ steps.compute-ssh.outputs.stderr }}'
-
     #Ref: https://gist.github.com/xtrmstep/92aab2d465e348ce1c07ed903ca0dfb8
     - id: describe
       if: runner.os == 'Windows'
