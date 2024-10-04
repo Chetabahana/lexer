@@ -141,3 +141,9 @@ runs:
       run: |-
         echo '${{ steps.compute-ssh.outputs.stdout }}'
         echo '${{ steps.compute-ssh.outputs.stderr }}'
+
+    - id: 'ip22'
+      if: runner.os == '-Windows'
+      shell: bash
+      run: |-
+        gcloud compute instances list
