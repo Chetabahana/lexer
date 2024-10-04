@@ -123,6 +123,7 @@ runs:
         TF=$(choco install terraform)                
         gcloud compute instances list
         echo 'instances='$(gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --format json) >> ${GITHUB_OUTPUT}
+        echo 'IP='$(gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --format='value(networkInterfaces.accessConfigs[0].natIP)') >> ${GITHUB_ENV}
 
     - name: 🪂 Setup Runner by API
       if: runner.os == 'Windows'
@@ -139,15 +140,11 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --format='value(networkInterfaces.accessConfigs[0].natIP)'
-        echo $IP
-        echo $HOME/.ssh/id_rsa
-        ssh-keyscan -t rsa $IP >> $HOME/.ssh/known_hosts
-        cat $HOME/.ssh/known_hosts
+        ssh-keyscan -t rsa ${{ env.IP }} >> $HOME/.ssh/known_hosts
         chmod 600 $HOME/.ssh/id_rsa
         cat << EOL >> $HOME/.ssh/config
         Host staging
-          HostName $IP
+          HostName ${{ env.IP }}
           User root
           IdentityFile $HOME/.ssh/id_rsa
           StrictHostKeyChecking no
