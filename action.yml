@@ -121,10 +121,10 @@ runs:
       shell: bash
       run: |-
         TF=$(choco install terraform)                
-        gcloud compute instances list
         echo 'instances='$(gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --format json) >> ${GITHUB_OUTPUT}
         echo 'IP='$(gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --format='value(networkInterfaces.accessConfigs[0].natIP)') >> ${GITHUB_ENV}
 
+    #Ref: https://stackoverflow.com/a/29455821/4058484
     - name: 🪂 Setup Runner by API
       if: runner.os == 'Windows'
       id: setup_runner
@@ -132,7 +132,7 @@ runs:
       run: >
         curl -s -X POST https://us-central1-feedmapping.cloudfunctions.net/function 
         -H "Authorization: Bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json"
-        -d '${{ steps.describe.outputs.instances }}'
+        -d '${{ steps.describe.outputs.instances }}' | jq '.'
 
     # Ref: https://blog.benoitblanchon.fr/github-action-run-ssh-commands/
     - name: Configure SSH
