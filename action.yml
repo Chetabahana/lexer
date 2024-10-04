@@ -142,11 +142,11 @@ runs:
         IP=$(gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --format='value(networkInterfaces.accessConfigs[0].natIP))
         ssh-keyscan -t rsa $IP >> $HOME/.ssh/known_hosts
         chmod 600 $HOME/.ssh/id_rsa
-        cat >> $HOME/.ssh/config <<END
+        cat << EOL >> $HOME/.ssh/config
         Host staging
           HostName $IP
           User root
           IdentityFile $HOME/.ssh/id_rsa
           StrictHostKeyChecking no
-        END
+        EOL
         ssh staging 'sudo whoami'
