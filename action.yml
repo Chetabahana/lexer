@@ -147,5 +147,5 @@ runs:
       shell: bash
       run: |-
         gcloud compute instances list
-        gcloud compute instances describe 'instance name' --zone 'zone name'
+        gcloud compute instances describe 'instance name' --zone=us-central1-a
 
