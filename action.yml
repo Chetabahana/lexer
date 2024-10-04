@@ -140,6 +140,8 @@ runs:
       shell: bash
       run: |
         IP=$(gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --format='value(networkInterfaces.accessConfigs[0].natIP))
+        echo $IP
+        echo $HOME/.ssh/id_rsa
         ssh-keyscan -t rsa $IP >> $HOME/.ssh/known_hosts
         chmod 600 $HOME/.ssh/id_rsa
         cat << EOL >> $HOME/.ssh/config
