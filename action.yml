@@ -148,4 +148,4 @@ runs:
       run: |-
         TF=$(choco install terraform)                
         gcloud compute instances list
-        gcloud compute instances describe 'grid-1' --zone=us-central1-a
+        gcloud compute instances describe 'grid-${{ env.IMAGE_TAG }}' --zone=us-central1-a
