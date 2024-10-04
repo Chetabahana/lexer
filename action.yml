@@ -158,4 +158,22 @@ runs:
       run: >
         curl -s -X POST https://us-central1-feedmapping.cloudfunctions.net/function 
         -H "Authorization: Bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json"
-        -d '${{ steps.describe.outputs.instances }}'      
+        -d '${{ steps.describe.outputs.instances }}'
+
+    # Ref: https://blog.benoitblanchon.fr/github-action-run-ssh-commands/
+    - name: Configure SSH
+      id: 'compute-ssh'
+      if: runner.os == 'Windows'
+      shell: bash
+      run: |
+        $IP=$(gcloud compute instances describe single-node --format='value(networkInterfaces.accessConfigs[0].natIP))
+        ssh-keyscan -t rsa $IP >> $HOME/.ssh/known_hosts
+        chmod 600 $HOME/.ssh/id_rsa
+        cat >> $HOME/.ssh/config <<END
+        Host staging
+          HostName $IP
+          User root
+          IdentityFile $HOME/.ssh/id_rsa
+          StrictHostKeyChecking no
+        END
+        ssh staging 'sudo whoami'
