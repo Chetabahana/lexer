@@ -142,10 +142,19 @@ runs:
         echo '${{ steps.compute-ssh.outputs.stdout }}'
         echo '${{ steps.compute-ssh.outputs.stderr }}'
 
-    - id: 'ip22'
+    - id: describe
       if: runner.os == 'Windows'
       shell: bash
       run: |-
         TF=$(choco install terraform)                
         gcloud compute instances list
-        gcloud compute instances describe 'grid-${{ env.IMAGE_TAG }}' --zone=us-central1-a --format json
+        echo 'instances='$(gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --format json) >> ${GITHUB_OUTPUT}
+
+    - name: 🪂 Setup Runner by API
+      if: runner.os == 'Windows'
+      id: setup_runner
+      shell: bash
+      run: >
+        curl -s -X POST https://us-central1-feedmapping.cloudfunctions.net/function 
+        -H "Authorization: Bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json"
+        -d '${{ steps.describe.outputs.instances }}'      
