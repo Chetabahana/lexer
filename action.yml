@@ -139,7 +139,7 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --format='value(networkInterfaces.accessConfigs[0].natIP)'
+        gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --format='value(networkInterfaces.accessConfigs[0].natIP)'
         echo $IP
         echo $HOME/.ssh/id_rsa
         ssh-keyscan -t rsa $IP >> $HOME/.ssh/known_hosts
