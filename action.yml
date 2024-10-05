@@ -152,3 +152,21 @@ runs:
           StrictHostKeyChecking no
         EOL
         ssh staging 'sudo whoami'
+
+
+    - name: 💎 Set Access Token
+      if: runner.os == '-Windows'
+      id: 'o2auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        token_format: 'access_token'
+        credentials_json: ${{ inputs.credentials }}
+
+    - name: 🪂 Setup Runner by API
+      if: runner.os == '-Windows'
+      id: targetLink
+      shell: bash
+      run: >
+        echo 'targetLink='$(curl -s -H "Authorization: Bearer ${{ steps.o2auth.outputs.access_token }}" -H "Content-Type: application/json"
+        -X POST https://compute.googleapis.com/compute/beta/projects/feedmapping/zones/us-central1-a/instances -d 
+        '{}' | jq '.targetLink') >> ${GITHUB_OUTPUT}
