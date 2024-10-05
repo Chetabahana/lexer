@@ -136,7 +136,7 @@ runs:
         -H "Authorization: Bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json"
         -d '${{ steps.describe.outputs.instances }}' | jq '.'
 
-    # Ref: https://blog.benoitblanchon.fr/github-action-run-ssh-commands/
+    #Ref: https://blog.benoitblanchon.fr/github-action-run-ssh-commands/
     - name: Configure SSH
       id: 'compute-ssh'
       if: runner.os == 'Windows'
@@ -151,6 +151,7 @@ runs:
           IdentityFile $HOME/.ssh/id_rsa
           StrictHostKeyChecking no
         EOL
+        #Ref: https://github.com/cloudkite-io/google-container-optimized-os-tools
         ssh staging 'sudo whoami && sudo ls -al /'
 
     - name: 💎 Set Access Token
