@@ -119,9 +119,10 @@ runs:
     - id: describe
       if: runner.os == 'Windows'
       shell: bash
-      run: |-
+      run: |
         TF=$(choco install terraform)
-        #ssh-keygen -t rsa -b 4096 -N '' -f $HOME/.ssh/id_rsa -C root && sed -i "1s|^|root: |" $HOME/.ssh/id_rsa.pub
+        ssh-keygen -t rsa -b 4096 -N '' -f $HOME/.ssh/id_rsa -C root && sed -i "1s|^|runner: |" $HOME/.ssh/id_rsa.pub
+        gcloud compute instances add-metadata grid-${{ env.IMAGE_TAG }} --metadata-from-file ssh-keys=$HOME/.ssh/id_rsa.pub
         echo 'instances='$(gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --format json) >> ${GITHUB_OUTPUT}
         echo 'IP='$(gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --format='value(networkInterfaces.accessConfigs[0].natIP)') >> ${GITHUB_ENV}
 
@@ -146,7 +147,7 @@ runs:
         cat << EOL >> $HOME/.ssh/config
         Host staging
           HostName ${{ env.IP }}
-          User root
+          User runner
           IdentityFile $HOME/.ssh/id_rsa
           StrictHostKeyChecking no
         EOL
