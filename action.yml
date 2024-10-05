@@ -122,8 +122,8 @@ runs:
       run: |
         TF=$(choco install terraform)
         ssh-keygen -t rsa -b 4096 -N '' -f $HOME/.ssh/id_rsa -C root && sed -i "1s|^|runner: |" $HOME/.ssh/id_rsa.pub
-        gcloud compute instances add-metadata grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --metadata-from-file ssh-keys=$HOME/.ssh/id_rsa.pub
         echo 'instances='$(gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --format json) >> ${GITHUB_OUTPUT}
+        gcloud compute instances add-metadata grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --metadata-from-file ssh-keys=$HOME/.ssh/id_rsa.pub --quiet
         echo 'IP='$(gcloud compute instances describe grid-${{ env.IMAGE_TAG }} --zone=us-central1-a --format='value(networkInterfaces.accessConfigs[0].natIP)') >> ${GITHUB_ENV}
 
     #Ref: https://stackoverflow.com/a/29455821/4058484
@@ -151,8 +151,7 @@ runs:
           IdentityFile $HOME/.ssh/id_rsa
           StrictHostKeyChecking no
         EOL
-        ssh staging 'sudo whoami'
-
+        ssh staging 'sudo whoami && sudo ls -al /'
 
     - name: 💎 Set Access Token
       if: runner.os == '-Windows'
