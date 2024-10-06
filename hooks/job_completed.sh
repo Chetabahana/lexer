@@ -12,7 +12,8 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   set -a && . /home/runner/_site/.env && set +a
 
   git config --global user.name "${GITHUB_ACTOR}"
-  git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"  REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${TARGET_REPOSITORY}.git"
+  git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+  REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${TARGET_REPOSITORY}.git"
   git remote set-url origin ${REMOTE_REPO} && git config --global --add safe.directory "/home/runner/_site"
   
   echo -e "\n$hr\nBuilded Pages\n$hr"
