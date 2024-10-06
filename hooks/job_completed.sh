@@ -36,14 +36,14 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
     JEKYLL_GITHUB_TOKEN=${GITHUB_ACCESS_TOKEN} DISABLE_WHITELIST=true jekyll build --profile -t -p /home/runner/_site/_plugins -d /home/runner/_site/docs    
 
     if [[ "${TARGET_REPOSITORY}" == "eq19/eq19.github.io" ]]; then echo "www.eq19.com" > /home/runner/_site/docs/CNAME; fi
-    rm -rf /home/runner/_site/docs/.nojekyll && touch /home/runner/_site/docs/.nojekyll
+    rm -rf /home/runner/_site/docs/.nojekyll && touch /home/runner/_site/docs/.nojekyll && git add .
     ls -al /home/runner/_site/docs
 
     echo -e "\n$hr\nFinal Network\n$hr"
     /mnt/disks/platform/usr/bin/docker network inspect bridge
 
     echo -e "\n$hr\nNext Workflow\n$hr"
-    git add . && git commit -m "${LATEST_COMMIT}" && git push
+    git commit -m "${LATEST_COMMIT}" && git push
   fi
 
   if [ $? -eq 0 ]; then
