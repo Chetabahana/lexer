@@ -26,6 +26,9 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   if [[ "${TEST_COMMIT}" =~ "nothing to commit" ]] ; then
     ls -al /home/runner/_site/docs
 
+    echo -e "\n$hr\nFinal Network\n$hr"
+    /mnt/disks/platform/usr/bin/docker network inspect bridge
+
     echo -e "\n$hr\nNext Workflow\n$hr"
     git commit --allow-empty -m "${LATEST_COMMIT}" && git push
   else
@@ -36,14 +39,14 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
     rm -rf /home/runner/_site/docs/.nojekyll && touch /home/runner/_site/docs/.nojekyll
     ls -al /home/runner/_site/docs
 
+    echo -e "\n$hr\nFinal Network\n$hr"
+    /mnt/disks/platform/usr/bin/docker network inspect bridge
+
     echo -e "\n$hr\nNext Workflow\n$hr"
     git add . && git commit -m "${LATEST_COMMIT}" && git push
   fi
 
   if [ $? -eq 0 ]; then
-    echo -e "\n$hr\nFinal Network\n$hr"
-    /mnt/disks/platform/usr/bin/docker network inspect bridge
-
     echo -e "\njob completed"
   else
     REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
