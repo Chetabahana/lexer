@@ -28,7 +28,7 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
 
   echo -e "\n$hr\nNext Workflow\n$hr"
   git add . && TEST_COMMIT=$(git commit -m "${LATEST_COMMIT}")
-  if [[ "${TEST_COMMIT}"=="nothing to commit" ]] ; then
+  if [[ "${TEST_COMMIT}" =~ "nothing to commit" ]] ; then
     git commit --allow-empty -m "${LATEST_COMMIT}" && git push
   else
     #Jekyll Quick Reference https://gist.github.com/DrOctogon/bfb6e392aa5654c63d12
