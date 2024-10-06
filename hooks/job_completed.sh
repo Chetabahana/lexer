@@ -34,11 +34,11 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
     rm -rf /home/runner/_site/docs/.nojekyll && touch /home/runner/_site/docs/.nojekyll && git add .
   fi
 
-  echo -e "\n$hr\nBuilded Pages\n$hr"
-  ls -al /home/runner/_site/docs
-
   echo -e "\n$hr\nFinal Network\n$hr"
   /mnt/disks/platform/usr/bin/docker network inspect bridge
+
+  echo -e "\n$hr\nFinal Docs\n$hr"
+  ls -al /home/runner/_site/docs
 
   echo -e "\n$hr\nNext Workflow\n$hr"
   git commit --allow-empty -m "${LATEST_COMMIT}" && git push
