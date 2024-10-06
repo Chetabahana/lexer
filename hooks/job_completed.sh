@@ -20,9 +20,6 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   echo -e "\n$hr\nDocker images\n$hr"
   /mnt/disks/platform/usr/bin/docker image ls
 
-  echo -e "\n$hr\nFinal Network\n$hr"
-  /mnt/disks/platform/usr/bin/docker network inspect bridge
-
   echo -e "\n$hr\nBuilded Pages\n$hr"
   git add . && TEST_COMMIT=$(git commit -m "${LATEST_COMMIT}")
 
@@ -44,6 +41,9 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   fi
 
   if [ $? -eq 0 ]; then
+    echo -e "\n$hr\nFinal Network\n$hr"
+    /mnt/disks/platform/usr/bin/docker network inspect bridge
+
     echo -e "\njob completed"
   else
     REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
