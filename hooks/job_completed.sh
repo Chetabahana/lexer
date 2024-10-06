@@ -20,31 +20,27 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   echo -e "\n$hr\nDocker images\n$hr"
   /mnt/disks/platform/usr/bin/docker image ls
 
-  echo -e "\n$hr\nBuilded Pages\n$hr"
+  echo -e "\n$hr\nSource Pages\n$hr"
   git add . && TEST_COMMIT=$(git commit -m "${LATEST_COMMIT}")
 
   if [[ "${TEST_COMMIT}" =~ "nothing to commit" ]] ; then
-    ls -al /home/runner/_site/docs
-
-    echo -e "\n$hr\nFinal Network\n$hr"
-    /mnt/disks/platform/usr/bin/docker network inspect bridge
-
-    echo -e "\n$hr\nNext Workflow\n$hr"
-    git commit --allow-empty -m "${LATEST_COMMIT}" && git push
+    ls -al /home/runner/_site
   else
     #Jekyll Quick Reference https://gist.github.com/DrOctogon/bfb6e392aa5654c63d12
     JEKYLL_GITHUB_TOKEN=${GITHUB_ACCESS_TOKEN} DISABLE_WHITELIST=true jekyll build --profile -t -p /home/runner/_site/_plugins -d /home/runner/_site/docs    
 
     if [[ "${TARGET_REPOSITORY}" == "eq19/eq19.github.io" ]]; then echo "www.eq19.com" > /home/runner/_site/docs/CNAME; fi
     rm -rf /home/runner/_site/docs/.nojekyll && touch /home/runner/_site/docs/.nojekyll && git add .
-    ls -al /home/runner/_site/docs
-
-    echo -e "\n$hr\nFinal Network\n$hr"
-    /mnt/disks/platform/usr/bin/docker network inspect bridge
-
-    echo -e "\n$hr\nNext Workflow\n$hr"
-    git commit -m "${LATEST_COMMIT}" && git push
   fi
+
+  echo -e "\n$hr\nBuilded Pages\n$hr"
+  ls -al /home/runner/_site/docs
+
+  echo -e "\n$hr\nFinal Network\n$hr"
+  /mnt/disks/platform/usr/bin/docker network inspect bridge
+
+  echo -e "\n$hr\nNext Workflow\n$hr"
+  git commit --allow-empty -m "${LATEST_COMMIT}" && git push
 
   if [ $? -eq 0 ]; then
     echo -e "\njob completed"
