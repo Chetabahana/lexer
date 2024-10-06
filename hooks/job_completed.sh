@@ -8,8 +8,8 @@ df -h
 
 if [ -d /mnt/disks/platform/usr/local/sbin ]; then
 
-  cd /home/runner/_site && rm -rf action.yml
   set -a && . /home/runner/_site/.env && set +a
+  cd /home/runner/_site && rm -rf .env action.yml
 
   git config --global user.name "${GITHUB_ACTOR}"
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
