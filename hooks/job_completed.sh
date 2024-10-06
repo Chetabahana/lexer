@@ -8,7 +8,7 @@ df -h
 
 if [ -d /mnt/disks/platform/usr/local/sbin ]; then
 
-  cd /home/runner/_site
+  cd /home/runner/_site && rm -rf action.yml
   set -a && . /home/runner/_site/.env && set +a
 
   git config --global user.name "${GITHUB_ACTOR}"
