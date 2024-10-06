@@ -20,12 +20,13 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   echo -e "\n$hr\nDocker images\n$hr"
   /mnt/disks/platform/usr/bin/docker image ls
 
-  echo -e "\n$hr\nSource Pages\n$hr"
   git add . && TEST_COMMIT=$(git commit -m "${LATEST_COMMIT}")
 
   if [[ "${TEST_COMMIT}" =~ "nothing to commit" ]] ; then
+    echo -e "\n$hr\nSource Pages\n$hr"
     ls -al /home/runner/_site
   else
+    echo -e "\n$hr\nBuild Pages\n$hr"
     #Jekyll Quick Reference https://gist.github.com/DrOctogon/bfb6e392aa5654c63d12
     JEKYLL_GITHUB_TOKEN=${GITHUB_ACCESS_TOKEN} DISABLE_WHITELIST=true jekyll build --profile -t -p /home/runner/_site/_plugins -d /home/runner/_site/docs    
 
