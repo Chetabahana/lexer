@@ -43,7 +43,7 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   echo -e "\n$hr\nNext Workflow\n$hr"
   git commit --allow-empty -m "${LATEST_COMMIT}" && git fetch && git rebase && git push
 
-  if [ $? -eq 0 ]; then
+  if [[ $? -eq 0 ]]; then
     echo -e "\njob completed"
   else
     REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
