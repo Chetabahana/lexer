@@ -41,7 +41,7 @@ if [ -d /mnt/disks/platform/usr/local/sbin ]; then
   ls -al /home/runner/_site/docs
 
   echo -e "\n$hr\nNext Workflow\n$hr"
-  git commit --allow-empty -m "${LATEST_COMMIT}" && git push
+  git commit --allow-empty -m "${LATEST_COMMIT}" && git fetch && git rebase && git push
 
   if [ $? -eq 0 ]; then
     echo -e "\njob completed"
