@@ -3,6 +3,7 @@ build-essential
 ca-certificates
 curl
 #docker.io
+doxygen
 gettext
 gh
 git
