@@ -135,3 +135,27 @@ jobs:
           credentials: ${{ secrets.GCP_CREDENTIALS }}
           gell_mann: ${{ toJSON(steps.eval-syntax.outputs) }}
  
+  job-failure:
+    runs-on: macos-latest
+    needs: [lexering,setup-parser]
+    if: ${{ always() && contains(needs.*.result, 'failure') }}
+
+    steps:
+      - name: 📂 Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          submodules: recursive
+          token: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: ⏪ Rewind
+        shell: bash
+        run:
+          cd ${GITHUB_WORKSPACE}
+  
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global --add safe.directory ${GITHUB_WORKSPACE}
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+          REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git remote set-url origin ${REMOTE_REPO} && git add . && git commit --allow-empty -m "rerun actions due to job failure" && git push
