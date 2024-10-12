@@ -47,6 +47,7 @@ RUN cd /tmp && wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1
   
 WORKDIR /home/runner
 ADD _site /home/runner/_site
+ADD scripts /home/runner/scripts
 
 # Install dependencies
 #RUN curl -fsSL https://get.docker.com -o- | sh
@@ -64,9 +65,8 @@ RUN GH_RUNNER_VERSION=${GH_RUNNER_VERSION:-$(curl --silent "https://api.github.c
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY scripts/entrypoint.sh /home/runner/entrypoint.sh
-RUN chmod +x /home/runner/entrypoint.sh
-ENTRYPOINT ["/home/runner/entrypoint.sh"]
+RUN chmod +x /home/runner/scripts/*.sh
+ENTRYPOINT ["/home/runner/scripts/entrypoint.sh"]
 
 COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN chmod 644 /etc/supervisor/conf.d/supervisord.conf
