@@ -68,6 +68,6 @@ RUN GH_RUNNER_VERSION=${GH_RUNNER_VERSION:-$(curl --silent "https://api.github.c
 RUN chmod +x /home/runner/scripts/*.sh
 ENTRYPOINT ["/home/runner/scripts/entrypoint.sh"]
 
-COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY conf/*.conf /etc/supervisor/conf.d/
 RUN chmod 644 /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
