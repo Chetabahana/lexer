@@ -6,10 +6,14 @@ hr='----------------------------------------------------------------------------
 echo -e "\n$hr\nFinal Space\n$hr"
 df -h
 
-echo -e "\n$hr\nDocker images\n$hr"
-/mnt/disks/platform/usr/bin/docker image ls
+if [ -d /mnt/disks/platform/usr/local/sbin ]; then
 
-echo -e "\n$hr\nFinal Network\n$hr"
-/mnt/disks/platform/usr/bin/docker network inspect bridge
+  echo -e "\n$hr\nDocker images\n$hr"
+  /mnt/disks/platform/usr/bin/docker image ls
+
+  echo -e "\n$hr\nFinal Network\n$hr"
+  /mnt/disks/platform/usr/bin/docker network inspect bridge
+
+fi
 
 echo -e "\njob completed"
