@@ -52,7 +52,7 @@ ADD scripts /home/runner/scripts
 # Install dependencies
 #RUN curl -fsSL https://get.docker.com -o- | sh
 RUN gem install faraday-retry github-pages --platform=ruby
-RUN npm install --package-lock-only redis talib pg mathjs gauss && \
+RUN npm install --package-lock-only redis talib pg mathjs gauss moxygen && \
     npm ci && npm cache clean --force
     
 ARG GH_RUNNER_VERSION
