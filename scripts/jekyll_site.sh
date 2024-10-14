@@ -21,21 +21,20 @@ else
   #Jekyll Quick Reference https://gist.github.com/DrOctogon/bfb6e392aa5654c63d12
   JEKYLL_GITHUB_TOKEN=${GITHUB_ACCESS_TOKEN} DISABLE_WHITELIST=true jekyll build --profile -t -p /home/runner/_site/_plugins -d /home/runner/_site/docs    
 
+  rm -rf /home/runner/_site/docs/.nojekyll && touch /home/runner/_site/docs/.nojekyll
   if [[ "${TARGET_REPOSITORY}" == "eq19/eq19.github.io" ]]; then echo "www.eq19.com" > /home/runner/_site/docs/CNAME; fi
-  rm -rf /home/runner/_site/docs/.nojekyll && touch /home/runner/_site/docs/.nojekyll && git add .
 fi
 
 echo -e "\n$hr\nFinal Docs\n$hr"
-ls -al /home/runner/_site/docs
+cd /home/runner/_site/docs && ls -al
+curl -s -H "Authorization: Bearer $(/mnt/disks/platform/usr/bin/gcloud auth print-identity-token)" -H "Content-Type: application/json" \
+  -X POST https://us-central1-feedmapping.cloudfunctions.net/function -json @data.json  | jq '.'
 
 echo -e "\n$hr\nNext Workflow\n$hr"
+cd /home/runner/_site && git add .
 git commit --allow-empty -m "${LATEST_COMMIT}" && git fetch && git rebase && git push
 
 if [[ $? -eq 0 ]]; then
-  cd /home/runner/_site/docs
-  curl -s -H "Authorization: Bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json" \
-    -X POST https://us-central1-feedmapping.cloudfunctions.net/function \
-    -json @data.json  | jq '.'
   echo -e "\njob completed"
 else
   exit 1
