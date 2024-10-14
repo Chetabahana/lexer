@@ -32,6 +32,10 @@ echo -e "\n$hr\nNext Workflow\n$hr"
 git commit --allow-empty -m "${LATEST_COMMIT}" && git fetch && git rebase && git push
 
 if [[ $? -eq 0 ]]; then
+  cd /home/runner/_site/docs
+  curl -s -X POST https://us-central1-feedmapping.cloudfunctions.net/function \
+    -H "Authorization: Bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json"
+    -json @data.json  | jq '.'
   echo -e "\njob completed"
 else
   exit 1
