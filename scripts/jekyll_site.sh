@@ -28,7 +28,7 @@ fi
 echo -e "\n$hr\nFinal Docs\n$hr"
 cd /home/runner/_site/docs && ls -al
 curl -s -H "Authorization: Bearer $(/mnt/disks/platform/usr/bin/gcloud auth print-identity-token)" -H "Content-Type: application/json" \
-  -X POST https://us-central1-feedmapping.cloudfunctions.net/function -json @data.json  | jq '.'
+  -X POST https://us-central1-feedmapping.cloudfunctions.net/function -json @data.json | jq '.'
 
 echo -e "\n$hr\nNext Workflow\n$hr"
 cd /home/runner/_site && git add .
