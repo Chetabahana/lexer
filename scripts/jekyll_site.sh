@@ -33,8 +33,8 @@ git commit --allow-empty -m "${LATEST_COMMIT}" && git fetch && git rebase && git
 
 if [[ $? -eq 0 ]]; then
   cd /home/runner/_site/docs
-  curl -s -X POST https://us-central1-feedmapping.cloudfunctions.net/function \
-    -H "Authorization: Bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json"
+  curl -s -H "Authorization: Bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json" \
+    -X POST https://us-central1-feedmapping.cloudfunctions.net/function \
     -json @data.json  | jq '.'
   echo -e "\njob completed"
 else
