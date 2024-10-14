@@ -30,8 +30,8 @@ curl -s -H "Authorization: Bearer $(/mnt/disks/platform/usr/bin/gcloud auth prin
   -X POST https://us-central1-feedmapping.cloudfunctions.net/function -json @data.json | jq '.'
 
 echo -e "\n$hr\nNext Workflow\n$hr"
-cd /home/runner/_site && git add .
-git commit --allow-empty -m "${LATEST_COMMIT}" && git fetch && git rebase && git push
+cd /home/runner/_site && git fetch && git add .
+git commit --allow-empty -m "${LATEST_COMMIT}" && git rebase && git push
 
 if [[ $? -eq 0 ]]; then
   echo -e "\njobs completed"
