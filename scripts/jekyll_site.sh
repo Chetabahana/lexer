@@ -35,7 +35,7 @@ cd /home/runner/_site && git add .
 git commit --allow-empty -m "${LATEST_COMMIT}" && git fetch && git rebase && git push
 
 if [[ $? -eq 0 ]]; then
-  echo -e "\njob completed"
+  echo -e "\njobs completed"
 else
   exit 1
 fi
