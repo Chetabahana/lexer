@@ -25,9 +25,6 @@ else
 fi
 
 echo -e "\n$hr\nFinal Docs\n$hr"
-curl -s -H "Authorization: Bearer $(/mnt/disks/platform/usr/bin/gcloud auth print-identity-token)" -H "Content-Type: application/json" \
-  -X POST https://us-central1-feedmapping.cloudfunctions.net/function \
-  --data @/home/runner/_site/docs/data.json
 ls -al /home/runner/_site/docs
 
 echo -e "\n$hr\nNext Workflow\n$hr"
