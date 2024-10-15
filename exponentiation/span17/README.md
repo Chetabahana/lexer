@@ -84,7 +84,11 @@ Quantum Chromo Dynamics (in short QCD) is the field that studies the strong forc
 
 ![images (10)](https://github.com/eq19/maps/assets/8466209/05f120ec-515e-4457-9625-bf4a6d7ee28f)
 
+The three kinds of [charge](https://en.m.wikipedia.org/wiki/Charge_(physics)) in QCD (as opposed to one in [quantum electrodynamics](https://en.m.wikipedia.org/wiki/Quantum_electrodynamics) or QED) are usually referred to as "[color charge](https://en.m.wikipedia.org/wiki/Color_charge)" by loose analogy to the three kinds of [color](https://en.m.wikipedia.org/wiki/Color) (red, green and blue) [perceived by humans](https://en.m.wikipedia.org/wiki/Color_vision). 
+
 ![QCD](https://github.com/eq19/maps/assets/8466209/fb3bf635-808c-4105-b8d6-2821486ed219)
+
+Other than this nomenclature, the quantum parameter "color" is completely unrelated to the everyday, familiar phenomenon of color.
 
 ```note
 In the 1980s, scientists discovered that a proton's three valance quarks (red, green, blue) account for only a fraction of the proton's overall spin. More recent measurements have revealed that gluons (yellow corkscrews) contribute as much as or possibly more than the quarks. _([Brookhaven National Laboratory](https://phys.org/news/2017-03-proton.html))_
@@ -92,11 +96,13 @@ In the 1980s, scientists discovered that a proton's three valance quarks (red, g
 
 [![proton-1](https://github.com/eq19/maps/assets/8466209/b110ca02-ac35-400a-8c83-dfb23e1c1c4b)](https://bigthink.com/starts-with-a-bang/why-8-types-gluon/)
 
-Within [a cycle](https://gist.github.com/eq19/0ce5848f7ad62dc46dedfaa430069857#true-prime-pairs) this scheme would generate the [prime platform](https://gist.github.com/eq19/0ce5848f7ad62dc46dedfaa430069857#primes-platform) which is performing ***the rank of 10 shapes*** starting with the primes 2,3,5,7. 
+Since the theory of electric charge is dubbed "[electrodynamics](https://en.m.wikipedia.org/wiki/Electrodynamics)", the [Greek](https://en.m.wikipedia.org/wiki/Ancient_Greek) word χρῶμα (chrōma, "color") is applied to the theory of color charge, "chromodynamics".
 
 ![qcd-620px](https://github.com/eq19/maps/assets/8466209/3d4c5903-0d79-4c11-8c89-1a62fedb8e29)
 
-![qcd_together](https://github.com/eq19/maps/assets/8466209/86fe9814-2aa3-42ba-9549-6569858c4690)
+The hadrons were sorted into groups having similar properties and masses using the **[eightfold way](https://en.m.wikipedia.org/wiki/Eightfold_way_(physics))**, invented in 1961 by Gell-Mann[[11]](https://en.m.wikipedia.org/wiki/Quantum_chromodynamics#cite_note-11).
+
+[![qcd_together](https://github.com/eq19/maps/assets/8466209/86fe9814-2aa3-42ba-9549-6569858c4690)](https://github.com/user-attachments/files/17381139/eightfold.pdf)
 
 Renormalizability has become an essential criterion for a quantum field theory to be considered as a viable one.
 
@@ -155,7 +161,17 @@ Quantum electrodynamics also leads to predictions beyond perturbation theory. In
 
 ![axioms-12-01058-g002-550](https://github.com/eq19/maps/assets/8466209/66dc1ba2-cbfd-4063-9f65-b6f32ce21dfd)
 
-![hq720 (1)](https://github.com/eq19/maps/assets/8466209/9a6fd867-6867-416a-9b36-126198f4d259)
+The absence of any new particles beyond the Standard Model (SM) in high-energy collisions at the LHC highlights the need to probe the SM in low-energy experiments.
+
+```note
+Abstract flavio is an open source tool for phenomenological analyses in flavour physics and other precision observables in the Standard Model and beyond. It consists of a library to compute predictions for a plethora of observables in quark and lepton flavour physics and electroweak precision tests, a database of experimental measurements of these observables, a statistics package that allows to construct Bayesian and frequentist likelihoods, and of convenient plotting and visualization routines. _([flavio - pdf](https://github.com/user-attachments/files/17380517/1810.08132v1.pdf))_
+```
+
+[![hq720 (1)](https://github.com/eq19/maps/assets/8466209/9a6fd867-6867-416a-9b36-126198f4d259)](https://github.com/user-attachments/files/17380517/1810.08132v1.pdf)
+
+New physics effects are parameterised as Wilson coefficients
+of dimension-six operators in the weak effective theory below the electroweak scale
+or the Standard Model EFT above it. 
 
 ```tip
 To display automatically generated tables with lists of all observables currently implemented in [flavio](https://github.com/flav-io/flavio). See also the notes on conventions at the bottom.
