@@ -65,7 +65,7 @@ jobs:
           initiate_pauli_sum: ${{ toJSON(steps.set-lexering.outputs) }}
 
       - name: 🪂 Feed Mapping
-        uses: eq19/feed@v3
+        uses: eq19/feed@v6
         id: feed-mapping
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
