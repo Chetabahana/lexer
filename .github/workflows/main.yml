@@ -54,7 +54,7 @@ jobs:
           token: ${{ secrets.ACCESS_TOKEN }}
 
       - name: ⚙️ Build Maps
-        uses: eq19/maps@v2
+        uses: eq19/maps@v9
         id: build-parser
         with:
           tmp: ${{ matrix.config.id }}
