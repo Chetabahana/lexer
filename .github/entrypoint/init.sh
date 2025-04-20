@@ -49,6 +49,7 @@ fi
 echo -e "\n$hr\nWORKSPACE\n$hr"
 RERUN_RUNNER=$(curl -s -H "Authorization: token $GH_TOKEN" -H "Accept: application/vnd.github.v3+json" \
   "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/variables/RERUN_RUNNER" | jq -r '.value')
+echo 'RERUN_RUNNER='${RERUN_RUNNER} >> ${GITHUB_ENV}
 
 if [[ "${JOBS_ID}" == "1" ]]; then
 
@@ -81,15 +82,15 @@ if [[ "${JOBS_ID}" == "1" ]]; then
       "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/variables/PARAMS_JSON" | jq -r '.value')
     echo "${PARAMS_JSON}" | jq '.' > $1/user_data/strategies/fibbo.json
 
-    if jq empty < $1/user_data/strategies/fibbo.json; then
-      cat $1/user_data/strategies/fibbo.json
+    cd $1 && javac -d user_data/ft_client/test_client javaCode/Main.java
+    if jq empty < user_data/strategies/fibbo.json; then
+      cat user_data/strategies/fibbo.json
     else
       echo "Invalid JSON"
     fi
 
-    cd $1 && javac -d user_data/ft_client/test_client javaCode/Main.java
-    cd ${GITHUB_WORKSPACE} && rm -rf user_data && mv -f $1/user_data . && ls -al .
-    if [[ "${RERUN_RUNNER}" != "false" ]]; then gh variable set RERUN_RUNNER --body "false"; fi
+    cd ${GITHUB_WORKSPACE}
+    rm -rf user_data && mv -f $1/user_data . && ls -al .
 
   fi
 
