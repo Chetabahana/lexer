@@ -10,6 +10,11 @@ on:
     types: [trigger_action, retry_workflow]
   workflow_dispatch:
     inputs:
+      FREQAI_MODEL:
+        description: 'the model of FreqAI to run'
+        default: 'false'
+        required: false
+        type: string
       REMOVE_RUNNER:
         description: 'remove runner if is set true'
         default: 'false'
@@ -40,12 +45,13 @@ jobs:
           - { os: ubuntu-latest, jobs_id: 1 }
           - { os: macos-latest, jobs_id: 2 }
     env:
-      FREQAIMODEL: ${{ vars.FREQAIMODEL }}
+      SCORE: ${{ vars.SCORE || 100 }}
       JOBS_ID: ${{ matrix.config.jobs_id }}
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
       DOC: '${{ vars.TARGET_REPOSITORY }}.wiki'
+      FREQAI_MODEL: ${{ github.event.inputs.FREQAI_MODEL }}
       REMOVE_RUNNER: ${{ github.event.inputs.REMOVE_RUNNER }}
-
+      
     # 🔧 Commutation relations
     runs-on: ${{ matrix.config.os }}
     continue-on-error: ${{ matrix.config.jobs_id != 1 && false || true }}
@@ -190,3 +196,4 @@ jobs:
           pauli_sum: ${{ toJSON(steps.eval-syntax.outputs) }}
           failure_status: ${{ contains(steps.eval-syntax.conclusion, 'failure') ||
             (env.JOBS_ID == 4 && contains(needs.lexering.result, 'failure')) }}
+          #manual_force_cancel: gh run cancel 19411342256 --repo eq19/grammar --force
