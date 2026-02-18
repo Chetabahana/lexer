@@ -1,6 +1,6 @@
 # Prime Unit Identity
 
-We are going to assign prime identity as a ***standard model*** that attempts to stimulate a quantum field model called ***[eQuantum](https://github.com/eq19)*** for _[the four (4) known fundamental forces](https://en.wikipedia.org/wiki/Fundamental_interaction)_.
+We are going to assign prime identity as the ***Standard Model*** to stimulate a quantum field model called ***[eQuantum](https://github.com/eq19)*** for _[the four (4) known fundamental forces](https://en.wikipedia.org/wiki/Fundamental_interaction)_.
 
 {% include list.liquid all=true %}
 
@@ -16,10 +16,10 @@ It is a taxicab number, and is variously known as Ramanujan's number and the Ram
 
 [![Ramanujan-Hardy number](https://user-images.githubusercontent.com/36441664/103107461-173c2b00-4671-11eb-962c-da7e9eab022e.png)](https://en.wikipedia.org/wiki/1729_(number))
 
-These three (3) number are [twin primes](https://en.wikipedia.org/wiki/Twin_prime). We called the pairs as _[True Prime Pairs](https://www.eq19.com/addition/file02.html#true-prime-pairs)_. Our scenario is mapping the distribution out of these pairs by taking the symmetrical behaviour of 36 as the smallest power (greater than 1) which is not a prime power.
+These three (3) number are [twin primes](https://en.wikipedia.org/wiki/Twin_prime). We called the pairs as _[True Prime Pairs](https://eq19.github.io/addition/spin1/)_. Our scenario is mapping the distribution out of these pairs by taking the symmetrical behaviour of 36 as the smallest power (greater than 1) which is not a prime power.
 
 ```tip
-The smallest square number expressible as the sum of **four (4) consecutive primes** in two ways (5 + 7 + 11 + 13 and 17 + 19) which are also **two (2) couples** of prime twins! _([Prime Curios!](https://en.wikipedia.org/wiki/1729_(number)](https://primes.utm.edu/curios/page.php?number_id=270)))_.
+It is the sum of the fourth pair of [twin-primes](https://en.wikipedia.org/wiki/Twin_prime) ([17](https://en.wikipedia.org/wiki/17_(number)) + [19](https://en.wikipedia.org/wiki/19_(number))) _([Wikipedia!](https://en.wikipedia.org/wiki/36_(number)))_.
 ```
 
 ```scss
@@ -42,7 +42,16 @@ $True Prime Pairs:
  -----+-----+---------
 ```
 
-Thus in short this is all about a method that we called as the ***[19 vs 18 Scenario](https://www.eq19.com/grammar/identition/#the-77-principles)*** of mapping [the quantum way](https://www.google.com/search?q=eQuantum) within a huge of [primes objects](https://github.com/eq19) (5 to 19) by [lexering](https://en.wikipedia.org/wiki/Lexer_generator) (11) the un[grammar](https://en.wikipedia.org/wiki/Grammar)ed feed (7) and [parsering](https://en.wikipedia.org/wiki/Comparison_of_parser_generators) (13) across [syntax](https://en.wikipedia.org/wiki/Syntax) (17). 
+Thus, in short, this is principally all about a method that we called as the ***[19 vs 18 Scenario](https://eq19.github.io/grammar/identition/#the-77-principles)*** of mapping [the quantum way](https://www.google.com/search?q=eQuantum) within a huge of [primes objects](https://github.com/eq19) (5 to 19) by [lexering](https://en.wikipedia.org/wiki/Lexer_generator) (11) the un[grammar](https://en.wikipedia.org/wiki/Grammar)ed feed (7) and [parsering](https://en.wikipedia.org/wiki/Comparison_of_parser_generators) (13) across [syntax](https://en.wikipedia.org/wiki/Syntax) (17). 
+
+```note
+The number 36 is a composite. Here are some of the other points taken from  _([Prime Curios!](https://t5k.org/curios/page.php?number_id=270))_.
+- The exact number of ways to partition the integer 36 is prime.
+- The smallest number which is the sum of two distinct odd primes in four ways (36 = 5 + 31 = 7 + 29 = 13 + 23 = 17 + 19). [McCranie]
+- The smallest square that is the sum of a twin prime pair {17, 19}. [Trotter]
+- The smallest number expressible as the sum of consecutive primes in two ways (5 + 7 + 11 + 13 and 17 + 19). [De Geest]
+- 5+7+11+13 is the smallest square number expressible as the sum of four consecutive primes which are also two couples of prime twins! [Herault]
+```
 
 ***Φ(1,2,3) = Φ(6,12,18) = Φ(13,37,61)***
 
@@ -90,11 +99,11 @@ layer | node | sub |  i  |  f
 ------|------|-----+-----+------
 ```
 
-The main background is that, as you may aware, the prime number theorem describes the [asymptotic distribution](https://youtu.be/j5s0h42GfvM) of prime numbers which is still a major problem in mathematic. 
+As you may aware, the prime number theorem describes the [asymptotic distribution](https://youtu.be/j5s0h42GfvM) of prime numbers which is still a major problem in mathematic. 
 
 ## Multiplication Zones
 
-Instead of a proved formula we came to a unique expression called ***zeta function***. This expression first appeared in a paper in 1737 entitled _Variae observationes circa series infinitas_. 
+Instead of a proved formula we came to an expression called ***zeta function*** that first appeared in a paper in 1737 entitled _Variae observationes circa series infinitas_. 
 
 ```tip
 This expression states that the sum of the zeta function is equal to the product of the reciprocal of one minus the reciprocal of primes to the powers. But what has this got to do with the primes?  The answer is in the following product taken over the primes p (discovered by _[Leonhard Euler](https://en.wikipedia.org/wiki/Leonhard_Euler)_):
@@ -110,7 +119,11 @@ In addition to the trivial roots, there also exist ***complex roots*** for real 
 
 [![trivial roots](https://user-images.githubusercontent.com/8466209/219828222-615a2037-dbcd-4412-95bf-740bb32094de.png)](https://www.mathpages.com/home/kmath738/kmath738.htm)
 
+The Riemann zeta function provides a way to give an exact formula for π(x) by summing over the non-trivial zeros of the zeta function.
+
+```note
 Meanwhile obtaining the non complex numbers it is easier to look at a graph like the one below which shows Li(x) (blue), R(x) (black), π(x) (red) and x/ln x (green); and then proclaim "R(x) is the best estimate of π(x)." Indeed it is for that range, but as we mentioned above, Li(x)-π(x) changes sign infinitely often, and near where it does, Li(x) would be the best value.
+```
 
 [![non complex numbers](https://user-images.githubusercontent.com/8466209/219214486-e6412fb0-d190-45ae-990f-524532661444.png)](https://primes.utm.edu/howmany.html#better)
 
@@ -134,10 +147,16 @@ We have Λ ≤ 0.2. The next entry is conditional on taking H a little higher th
 
 [![functional equation](https://user-images.githubusercontent.com/8466209/219715694-751fe538-378d-4f58-ae82-ac9e6823ad65.png)](https://arxiv.org/pdf/2004.09765.pdf)
 
-This Euler formula represents the distribution of a group of numbers that are positioned at regular intervals on a straight line to each other. Riemann later extended the definition of zeta(s) to all complex numbers (***except the simple pole at s=1 with residue one***). Euler's product still holds if the real part of s is greater than one. Riemann derived the functional equation of zeta function.
+This Euler formula represents the distribution of a group of numbers that are positioned at regular intervals on a straight line to each other.
 
 ```danger
-The Riemann zeta function has the trivial zeros at -2, -4, -6, ... (the poles of gamma(s/2)).  Using the Euler product (with the functional equation) it is easy to show that all the other zeros are in the critical strip of non-real complex numbers with 0 < Re(s) < 1, and that they are symmetric about the critical line Re(s)=1/2. The unproved Riemann hypothesis is that all of the nontrivial zeros are actually on the critical line _([primes.utm.edu](https://primes.utm.edu/notes/rh.html))_.
+Riemann later extended the definition of zeta(s) to all complex numbers (***except the simple pole at s=1 with residue one***).
+
+- Euler's product still holds if the real part of s is greater than one.
+- Riemann derived the functional equation of zeta function. This Riemann zeta function has the trivial zeros at -2, -4, -6, ... (the poles of gamma(s/2)).
+- Using the Euler product (with the functional equation) it is easy to show that all the other zeros are in the critical strip of non-real complex numbers with 0 < Re(s) < 1, and that they are symmetric about the critical line Re(s)=1/2.
+
+The unproved Riemann hypothesis is that all of the nontrivial zeros are actually on the critical line _([primes.utm.edu](https://primes.utm.edu/notes/rh.html))_.
 ```
 
 [![zeta function](https://user-images.githubusercontent.com/8466209/219720444-e5ba30ac-e000-4c85-8678-186676b93d2b.png)](https://primes.utm.edu/notes/rh.html)
@@ -159,7 +178,7 @@ Or may be [start again from the Euler Function](https://youtu.be/FCpRl0NzVu4).
 _[Freeman Dyson](https://en.wikipedia.org/wiki/Freeman_Dyson#Quantum_physics_and_prime_numbers)_ discovered an intriguing connection between quantum physics and [Montgomery's pair correlation conjecture](https://en.wikipedia.org/wiki/Montgomery%27s_pair_correlation_conjecture) about the zeros of the [zeta function](https://gist.github.com/eq19/e9832026b5b78f694e4ad22c3eb6c3ef#zeta-function) which dealts with the distribution of primes.
 
 ```note
-The Mathematical Elementary Cell 30 (***MEC30***) standard _[unites](https://www.eq19.com/multiplication/12.html#entrypoint-of-momentum-spin-3)_ the mathematical and physical results of 1972 by _the mathematician Hugh Montgomery and the physicist Freeman Dyson_ and thus reproduces energy distribution in systems as a path plan ***more accurately than a measurement***. _([Google Patent DE102011101032A9](https://patents.google.com/patent/DE102011101032A9/en#similarDocuments))_
+The Mathematical Elementary Cell 30 (***MEC30***) standard _[unites](https://eq19.github.io/multiplication/12.html#entrypoint-of-momentum-spin-3)_ the mathematical and physical results of 1972 by _the mathematician Hugh Montgomery and the physicist Freeman Dyson_ and thus reproduces energy distribution in systems as a path plan ***more accurately than a measurement***. _([Google Patent DE102011101032A9](https://patents.google.com/patent/DE102011101032A9/en#similarDocuments))_
 ```
 
 [![The Mathematical Elementary Cell 30](https://user-images.githubusercontent.com/36441664/74366957-992db780-4e03-11ea-8f26-cca32bd26003.png)](https://patentimages.storage.googleapis.com/6f/e3/f0/b8f7292f1f2749/DE102011101032A9.pdf)
@@ -172,18 +191,18 @@ Euler's identity is considered to be an exemplar of deep mathematical beauty as 
 
 [![Euler's identity](https://user-images.githubusercontent.com/8466209/219584666-703f4584-db7c-4f2d-9714-f52067869ef3.png)](https://en.wikipedia.org/wiki/Euler%27s_identity)
 
-The finiteness position of Euler's identity by the said _MEC30_ opens up the possibility of accurately representing the self-similarity based on the distribution of _[True Prime Pairs](https://www.eq19.com/addition/file02.html#true-prime-pairs)_ so that all number would belongs together with [their own identitities](https://www.eq19.com/identition/). 
+The finiteness position of Euler's identity by the said _MEC30_ opens up the possibility of accurately representing the self-similarity based on the distribution of _[True Prime Pairs](https://eq19.github.io/addition/file02.html#true-prime-pairs)_ so that all number would belongs together with [their own identitities](https://eq19.github.io/identition/). 
 
 ```tip
 {{ site.github.latest_release.body }}
 ```
 
-[![DE102011101032A9.pdf](https://user-images.githubusercontent.com/36441664/74591731-f5cfe300-504c-11ea-9e04-d814c57aa969.png)](https://www.eq19.com/exponentiation/#parsering-structure)
+[![DE102011101032A9.pdf](https://user-images.githubusercontent.com/36441664/74591731-f5cfe300-504c-11ea-9e04-d814c57aa969.png)](https://eq19.github.io/exponentiation/#parsering-structure)
 
-Nothing is going to be easly about the nature of prime numbers but they demonstrably congruent to something organized. Let's discuss starting with the _[addition zones](https://www.eq19.com/addition/)_.
+Nothing is going to be easly about the nature of prime numbers but they demonstrably congruent to something organized. Let's discuss starting with the _[addition zones](https://eq19.github.io/addition/)_.
 
 **[eQuantum Project](https://github.com/eq19)**   
-Copyright © 2023-2024
+Copyright © 2023-2026
 
 Reference:
 * [Riemann Zeta](https://commons.wikimedia.org/wiki/File:RiemannZeta_Zeros.svg)
