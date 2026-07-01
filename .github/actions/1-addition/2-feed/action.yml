@@ -113,27 +113,34 @@ runs:
         postgres-version: "17"
         ssl: true
 
-    - name: 🪂 Download data
+    - name: 🪂 Install Freqtrafe
       if: env.RERUN_RUNNER == 'false'
       shell: bash
+      env:
+        VERSION: "2025.12"
       run: |
         cd user_data/build_helpers
         ./install_ta-lib.sh > /dev/null 2>&1 && rm -rf *.txt
 
-        # Download requirement files from Freqtrade 2025.10 (corrected)
-        curl -s https://api.github.com/repos/freqtrade/freqtrade/contents?ref=2025.10 \
-          | jq -r '.[] | select(.name | test("^requirements(-.*)?\\.txt$")) | .path' \
-          | xargs -I{} curl -sO "https://raw.githubusercontent.com/freqtrade/freqtrade/2025.10/{}"
+        # Download requirement files from Freqtrade
+        for f in requirements.txt requirements-dev.txt requirements-hyperopt.txt requirements-plot.txt requirements-freqai.txt requirements-freqai-rl.txt; do
+          curl -fsSLO --retry 5 --retry-delay 2 \
+          https://raw.githubusercontent.com/freqtrade/freqtrade/$VERSION/$f || true
+        done
 
         pip install -qq --no-cache-dir -r ${{ github.workspace }}/user_data/build_helpers/requirements-plot.txt
-        pip install -qq --no-cache-dir -r ${{ github.workspace }}/user_data/build_helpers/requirements-hyperopt.txt
-        pip install -qq --no-cache-dir -r ${{ github.workspace }}/user_data/build_helpers/requirements-freqai-rl.txt
+        if [[ "$RUN_MODE" != "FreqAI" ]]; then
+          pip install -qq --no-cache-dir -r ${{ github.workspace }}/user_data/build_helpers/requirements-hyperopt.txt
+        else
+          pip install -qq --no-cache-dir -r ${{ github.workspace }}/user_data/build_helpers/requirements-freqai-rl.txt
+          pip install -qq --no-cache-dir "torch==2.5.1" "torchvision==0.20.1" --force-reinstall
+        fi
 
-        pip install -qq --no-cache-dir ta "numpy<3.0" "aiodns<3.0" "freqtrade==2025.10"
+        pip install -qq --no-cache-dir ta "numpy<3.0" "aiodns<3.0" "freqtrade==$VERSION"
         cd ${{ github.workspace }} && bash user_data/ft_client/test_client/feed.sh
 
     - name: Upload downloaded data as artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       if: env.RERUN_RUNNER == 'false'
       with:
         name: freqtrade-data
@@ -151,7 +158,7 @@ runs:
         EXPECTED_SERVER_VERSION: 17
         EXPECTED_SSL: true
       run: |
-        bash user_data/ft_client/test_client/feed.sh hyperopt
+        bash user_data/ft_client/test_client/feed.sh $RUN_MODE
         ##cd /home/runner/work/_actions/eq19/eq19/v2/integrations/tensorflow
         ##pip install -e python_projects/* && iree-import-tflite -h && iree-import-tf -h
 
@@ -201,4 +208,6 @@ runs:
       if: ${{ failure() }}
       shell: bash
       run: |
-        [[ "$GITHUB_JOB" == "lexering" ]] && gh workflow run "main.yml" --raw-field "FREQAI_MODEL=$FREQAI_MODEL" --raw-field "REDUCE_EPOCH=$REDUCE_EPOCH"
+        [[ "$GITHUB_JOB" == "lexering" ]] && gh workflow run "main.yml" --repo "$REPO_NAME" \
+          --raw-field "RUN_MODE=$RUN_MODE" --raw-field "REMOVE_RUNNER=$RERUN_RUNNER" \
+          --raw-field "REDUCE_EPOCH=$REDUCE_EPOCH" --raw-field "BYPASS_LEXERING=$BYPASS_LEXERING"
